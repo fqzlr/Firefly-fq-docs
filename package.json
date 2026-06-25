@@ -1,0 +1,14 @@
+{
+  "name": "firefly-blog-docs",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Firefly Blog - 基于 Astro 框架的个人博客主题文档",
+  "scripts": {
+    "dev": "vitepress dev --host 0.0.0.0",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  }
+}
