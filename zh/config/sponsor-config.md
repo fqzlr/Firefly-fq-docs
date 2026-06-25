@@ -1,8 +1,8 @@
-# 赞助配置详解
+﻿# 赞助配置详解
 
 赞助配置文件用于设置赞助页面的内容、赞助方式、赞助者列表等信息。
 
-配置文件路径：[sponsorConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/sponsorConfig.ts)
+配置文件路径：`sponsorConfig.ts`
 
 ## 页面基本配置
 

@@ -1,8 +1,8 @@
-# 笔记配置详解
+﻿# 笔记配置详解
 
 笔记配置文件用于配置基于 GitHub Gist 的外部笔记本数据源，支持多个独立笔记本，可通过后台管理面板在线撰写和管理笔记。
 
-配置文件路径：[externalNotebooksConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/externalNotebooksConfig.ts)
+配置文件路径：`externalNotebooksConfig.ts`
 
 ::: tip
 笔记功能与说说功能共用同一套后台认证机制，配置方法类似。每个笔记本使用独立的 Gist 存储，避免单个 Gist 空间不足。
@@ -80,14 +80,24 @@ notebookGists: {
 
 ## GitHub Token 配置
 
-与说说配置共用同一个 Token，需要有 `gist` 权限。在部署平台环境变量中设置：
+与说说、友情链接、影视追番等功能共用同一个 Token，需要有 `gist` 权限。
+
+**方式一：后台统一配置（推荐）**
+
+登录后台 `/admin/`，进入「🔧 接口配置」页面统一配置 Token，一处配置全后台生效。
+
+**方式二：环境变量配置**
+
+在部署平台环境变量中设置：
 ```
 GITHUB_TOKEN=你的GitHubToken
 ```
 
 ## 密码配置
 
-密码哈希生成方法与说说配置相同。注意：笔记后台与说说后台共用密码，修改一处另一处也需要同步更新（或设置为相同的哈希值）。
+笔记后台与说说后台共用密码。**推荐在线修改：** 登录后台后进入「🔧 接口配置 → 🔐 管理密码修改」即可在线修改，系统自动计算 SHA-256 哈希并更新配置文件。
+
+手动修改时，将生成的密码哈希填入 `externalMomentsConfig.ts` 的 `adminPasswordHash` 字段即可，所有模块共用同一密码。
 
 ## 数据格式
 

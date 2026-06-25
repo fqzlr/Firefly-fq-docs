@@ -1,8 +1,8 @@
-# 导航栏配置
+﻿# 导航栏配置
 
 导航栏配置文件用于设置博客顶部导航栏的链接和搜索功能。
 
-配置文件路径：[navBarConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/navBarConfig.ts)
+配置文件路径：`navBarConfig.ts`
 
 ## 导航栏链接配置
 

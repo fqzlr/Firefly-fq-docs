@@ -1,8 +1,8 @@
-# 说说动态配置详解
+﻿# 说说动态配置详解
 
 说说动态配置文件用于配置基于 GitHub Gist 的外部说说数据源，支持通过后台管理面板在线发布、编辑、删除说说，无需修改代码或重新构建。
 
-配置文件路径：[externalMomentsConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/externalMomentsConfig.ts)
+配置文件路径：`externalMomentsConfig.ts`
 
 ::: tip
 说说功能配合 CMS 后台管理面板使用，可以在线发布动态，无需每次都修改代码重新部署。
@@ -39,33 +39,31 @@
 3. 勾选 `gist` 权限
 4. 生成后复制保存 Token（只显示一次）
 
-### 3. 配置环境变量
+### 3. 配置 Token
+
+**方式一：后台统一配置（推荐）**
+
+登录后台 `/admin/`，进入「🔧 接口配置」页面，在「🔑 GitHub Token」输入框中粘贴 Token 并保存。一处配置，说说、笔记、友情链接、影视追番等所有模块共用。
+
+**方式二：环境变量配置**
 
 在部署平台（如 EdgeOne Pages、Vercel）的环境变量中添加：
 ```
 GITHUB_TOKEN=你的GitHubToken
 ```
 
-本地开发时可以在 `.env` 文件中添加。
+本地开发时可以在 `.env` 文件中添加。配置环境变量后后台会自动读取，无需手动输入。
 
 ### 4. 修改后台密码
 
 默认密码是 `admin123`，**强烈建议修改为自己的密码**。
 
-生成密码哈希的方法：
+**在线修改（推荐）：** 登录后台后进入「🔧 接口配置 → 🔐 管理密码修改」，输入新密码即可在线修改，系统自动计算 SHA-256 哈希并提交到 GitHub。
 
-**方法一：PowerShell（Windows）**
-```powershell
-$bytes = [System.Text.Encoding]::UTF8.GetBytes("你的新密码")
-[BitConverter]::ToString([System.Security.Cryptography.SHA256]::Create().ComputeHash($bytes)).Replace("-", "").ToLower()
-```
+**手动修改：** 生成密码哈希后替换 `adminPasswordHash` 的值。哈希生成方法：
 
-**方法二：浏览器控制台**
-```javascript
-await crypto.subtle.digest('SHA-256', new TextEncoder().encode('你的新密码')).then(b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join(''))
-```
-
-将生成的 64 位十六进制字符串替换 `adminPasswordHash` 的值。
+- PowerShell：`[BitConverter]::ToString([System.Security.Cryptography.SHA256]::Create().ComputeHash([System.Text.Encoding]::UTF8.GetBytes("你的新密码"))).Replace("-", "").ToLower()`
+- 浏览器控制台：`await crypto.subtle.digest('SHA-256', new TextEncoder().encode('你的新密码')).then(b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join(''))`
 
 ## 数据格式
 

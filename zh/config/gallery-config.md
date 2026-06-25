@@ -1,8 +1,8 @@
-# 相册配置详解
+﻿# 相册配置详解
 
 相册配置文件用于管理相册列表、瀑布流布局和网络相册设置。
 
-配置文件路径：[galleryConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/galleryConfig.ts)
+配置文件路径：`galleryConfig.ts`
 
 ## 基本配置
 

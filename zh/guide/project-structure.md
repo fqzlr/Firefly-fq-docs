@@ -1,4 +1,4 @@
-# 项目结构详解
+﻿# 项目结构详解
 
 Firefly 博客是基于 Astro 框架构建的现代化静态博客主题，采用 TypeScript、Svelte 组件和 Tailwind CSS 技术栈。本文档将详细介绍项目的目录结构和各模块功能。
 
@@ -30,28 +30,28 @@ my-blog/
 
 | 配置文件 | 功能说明 |
 |---------|---------|
-| [siteConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/siteConfig.ts) | 站点基础配置（标题、URL、主题色、页面开关等） |
-| [musicConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/musicConfig.ts) | 音乐播放器配置（Meting API、本地歌单等） |
-| [commentConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/commentConfig.ts) | 评论系统配置（Giscus、Twikoo、Waline等） |
-| [navBarConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/navBarConfig.ts) | 导航栏菜单配置 |
-| [sidebarConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/sidebarConfig.ts) | 侧边栏组件配置 |
-| [profileConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/profileConfig.ts) | 个人资料卡片配置 |
-| [footerConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/footerConfig.ts) | 页脚链接配置 |
-| [fontConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/fontConfig.ts) | 自定义字体配置 |
-| [friendsConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/friendsConfig.ts) | 友链页面配置 |
-| [galleryConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/galleryConfig.ts) | 相册页面配置 |
-| [adConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/adConfig.ts) | 广告组件配置 |
-| [announcementConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/announcementConfig.ts) | 公告组件配置 |
-| [sponsorConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/sponsorConfig.ts) | 赞助页面配置 |
-| [licenseConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/licenseConfig.ts) | 文章默认版权配置 |
-| [coverImageConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/coverImageConfig.ts) | 文章封面图配置 |
-| [backgroundWallpaper.ts](file:///e:/AItool/zzwork/my-blog/src/config/backgroundWallpaper.ts) | 背景壁纸配置 |
-| [pioConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/pioConfig.ts) | Live2D/Spine 看板娘配置 |
-| [aiSearchConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/aiSearchConfig.ts) | AI 搜索配置 |
-| [calendarConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/calendarConfig.ts) | 日历功能配置 |
-| [plantumlConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/plantumlConfig.ts) | PlantUML 图表配置 |
-| [expressiveCodeConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/expressiveCodeConfig.ts) | 代码块高亮配置 |
-| [index.ts](file:///e:/AItool/zzwork/my-blog/src/config/index.ts) | 配置统一导出入口 |
+| `siteConfig.ts` | 站点基础配置（标题、URL、主题色、页面开关等） |
+| `musicConfig.ts` | 音乐播放器配置（Meting API、本地歌单等） |
+| `commentConfig.ts` | 评论系统配置（Giscus、Twikoo、Waline等） |
+| `navBarConfig.ts` | 导航栏菜单配置 |
+| `sidebarConfig.ts` | 侧边栏组件配置 |
+| `profileConfig.ts` | 个人资料卡片配置 |
+| `footerConfig.ts` | 页脚链接配置 |
+| `fontConfig.ts` | 自定义字体配置 |
+| `friendsConfig.ts` | 友链页面配置 |
+| `galleryConfig.ts` | 相册页面配置 |
+| `adConfig.ts` | 广告组件配置 |
+| `announcementConfig.ts` | 公告组件配置 |
+| `sponsorConfig.ts` | 赞助页面配置 |
+| `licenseConfig.ts` | 文章默认版权配置 |
+| `coverImageConfig.ts` | 文章封面图配置 |
+| `backgroundWallpaper.ts` | 背景壁纸配置 |
+| `pioConfig.ts` | Live2D/Spine 看板娘配置 |
+| `aiSearchConfig.ts` | AI 搜索配置 |
+| `calendarConfig.ts` | 日历功能配置 |
+| `plantumlConfig.ts` | PlantUML 图表配置 |
+| `expressiveCodeConfig.ts` | 代码块高亮配置 |
+| `index.ts` | 配置统一导出入口 |
 
 ::: tip 配置修改提示
 大部分配置文件修改后会自动热更新，但部分配置（如 `rehypeCallouts` 主题）需要重启开发服务器才能生效。
@@ -221,7 +221,7 @@ src/content/
     └── routines/
 ```
 
-内容 Schema 定义在 [content.config.ts](file:///e:/AItool/zzwork/my-blog/src/content.config.ts) 中，包含完整的字段类型验证。
+内容 Schema 定义在 `content.config.ts` 中，包含完整的字段类型验证。
 
 #### src/pages/ - 页面路由目录
 
@@ -332,12 +332,12 @@ src/types/
 
 | 路径 | 说明 |
 |------|------|
-| [src/layouts/](file:///e:/AItool/zzwork/my-blog/src/layouts/) | 页面布局组件（Layout.astro、MainGridLayout.astro） |
-| [src/plugins/](file:///e:/AItool/zzwork/my-blog/src/plugins/) | Markdown 插件（rehype/remark 插件） |
-| [src/constants/](file:///e:/AItool/zzwork/my-blog/src/constants/) | 常量定义（图标、链接预设等） |
-| [src/workers/](file:///e:/AItool/zzwork/my-blog/src/workers/) | Web Worker（AI 聊天、留言板） |
-| [src/env.d.ts](file:///e:/AItool/zzwork/my-blog/src/env.d.ts) | Astro 环境类型声明 |
-| [src/global.d.ts](file:///e:/AItool/zzwork/my-blog/src/global.d.ts) | 全局类型声明 |
+| `src/layouts/` | 页面布局组件（Layout.astro、MainGridLayout.astro） |
+| `src/plugins/` | Markdown 插件（rehype/remark 插件） |
+| `src/constants/` | 常量定义（图标、链接预设等） |
+| `src/workers/` | Web Worker（AI 聊天、留言板） |
+| `src/env.d.ts` | Astro 环境类型声明 |
+| `src/global.d.ts` | 全局类型声明 |
 
 ### public/ - 静态资源目录
 
@@ -361,9 +361,9 @@ public/
 
 | 脚本 | 功能 |
 |------|------|
-| [new-post.js](file:///e:/AItool/zzwork/my-blog/scripts/new-post.js) | 创建新文章的命令行工具 |
-| [generate-icons.js](file:///e:/AItool/zzwork/my-blog/scripts/generate-icons.js) | 生成图标雪碧图 |
-| [build-vectorize-index.js](file:///e:/AItool/zzwork/my-blog/scripts/build-vectorize-index.js) | 构建向量化搜索索引 |
+| `new-post.js` | 创建新文章的命令行工具 |
+| `generate-icons.js` | 生成图标雪碧图 |
+| `build-vectorize-index.js` | 构建向量化搜索索引 |
 
 使用 `pnpm new-post` 命令可以快速创建新文章。
 
@@ -386,13 +386,13 @@ docs/
 
 | 文件 | 说明 |
 |------|------|
-| [astro.config.mjs](file:///e:/AItool/zzwork/my-blog/astro.config.mjs) | Astro 核心配置（集成、Markdown、构建选项等） |
-| [package.json](file:///e:/AItool/zzwork/my-blog/package.json) | 项目依赖和 npm 脚本 |
-| [biome.json](file:///e:/AItool/zzwork/my-blog/biome.json) | Biome 代码检查和格式化配置 |
-| [postcss.config.mjs](file:///e:/AItool/zzwork/my-blog/postcss.config.mjs) | PostCSS 配置 |
-| [pagefind.yml](file:///e:/AItool/zzwork/my-blog/pagefind.yml) | Pagefind 全文搜索配置 |
-| [.env.example](file:///e:/AItool/zzwork/my-blog/.env.example) | 环境变量示例文件 |
-| [tsconfig.json](file:///e:/AItool/zzwork/my-blog/tsconfig.json) | TypeScript 配置 |
+| `astro.config.mjs` | Astro 核心配置（集成、Markdown、构建选项等） |
+| `package.json` | 项目依赖和 npm 脚本 |
+| `biome.json` | Biome 代码检查和格式化配置 |
+| `postcss.config.mjs` | PostCSS 配置 |
+| `pagefind.yml` | Pagefind 全文搜索配置 |
+| `.env.example` | 环境变量示例文件 |
+| `tsconfig.json` | TypeScript 配置 |
 
 ::: warning 注意事项
 1. 修改 `astro.config.mjs` 后必须重启开发服务器

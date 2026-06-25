@@ -1,8 +1,8 @@
-# 广告配置详解
+﻿# 广告配置详解
 
 广告配置文件用于设置侧边栏广告组件的内容，支持纯图片广告和带文字内容的完整广告。
 
-配置文件路径：[adConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/adConfig.ts)
+配置文件路径：`adConfig.ts`
 
 ::: tip
 这里只是配置广告内容，如果要开关广告组件，请在 `sidebarConfig.ts` 中控制侧边栏组件的启用。

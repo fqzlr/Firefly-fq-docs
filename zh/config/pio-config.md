@@ -1,8 +1,8 @@
-# 看板娘配置详解
+﻿# 看板娘配置详解
 
 看板娘配置文件用于设置 Spine 2D 模型和 Live2D 模型看板娘，支持位置、尺寸、交互消息、响应式等配置。
 
-配置文件路径：[pioConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/pioConfig.ts)
+配置文件路径：`pioConfig.ts`
 
 主题支持两种看板娘模型：
 - **Spine 模型**：使用 Esoteric Software Spine 制作的 2D 骨骼动画模型

@@ -1,4 +1,4 @@
-# 快速开始
+﻿# 快速开始
 
 Firefly 是一款基于 **Astro 框架** 开发的清新美观且现代化个人博客主题，专为技术爱好者和内容创作者设计。该主题融合了现代 Web 技术栈，提供了丰富的功能模块和高度可定制的界面，让您能够轻松打造出专业且美观的个人博客网站。
 
@@ -118,7 +118,7 @@ my-blog/
 
 ### 1. 站点基础配置
 
-编辑 [src/config/siteConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/siteConfig.ts)：
+编辑 `src/config/siteConfig.ts`：
 
 ```typescript
 export const siteConfig: SiteConfig = {
@@ -132,11 +132,11 @@ export const siteConfig: SiteConfig = {
 
 ### 2. 导航栏配置
 
-编辑 [src/config/navBarConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/navBarConfig.ts) 来定制导航链接。
+编辑 `src/config/navBarConfig.ts` 来定制导航链接。
 
 ### 3. 个人资料配置
 
-编辑 [src/config/profileConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/profileConfig.ts) 来设置头像、个人简介、社交链接等。
+编辑 `src/config/profileConfig.ts` 来设置头像、个人简介、社交链接等。
 
 ::: tip 提示
 所有配置文件都有详细的注释说明，你可以直接参考注释进行配置。更多配置选项请查看 [配置指南](/zh/config/site-config) 章节。

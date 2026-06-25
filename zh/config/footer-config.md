@@ -1,8 +1,8 @@
-# 页脚配置详解
+﻿# 页脚配置详解
 
 页脚配置文件用于启用自定义页脚 HTML 内容注入功能。
 
-配置文件路径：[footerConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/footerConfig.ts)
+配置文件路径：`footerConfig.ts`
 
 ## 基本配置
 
@@ -14,7 +14,7 @@
 
 自定义页脚内容需要直接编辑 HTML 文件：
 
-文件路径：[FooterConfig.html](file:///e:/AItool/zzwork/my-blog/src/config/FooterConfig.html)
+文件路径：`FooterConfig.html`
 
 你可以在该文件中添加备案号、自定义链接、版权声明等 HTML 内容。
 

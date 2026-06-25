@@ -1,8 +1,8 @@
-# 日历配置详解
+﻿# 日历配置详解
 
 日历配置文件用于设置日历页面的节日、生日、日程安排等，支持公历和农历日期。
 
-配置文件路径：[calendarConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/calendarConfig.ts)
+配置文件路径：`calendarConfig.ts`
 
 ## 基本配置
 

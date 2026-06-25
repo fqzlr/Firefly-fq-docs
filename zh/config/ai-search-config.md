@@ -1,8 +1,8 @@
-# AI搜索配置详解
+﻿# AI搜索配置详解
 
 AI搜索配置文件用于配置基于向量检索的AI智能搜索功能，包括API地址、模型配置、向量索引等。
 
-配置文件路径：[aiSearchConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/aiSearchConfig.ts)
+配置文件路径：`aiSearchConfig.ts`
 
 ::: warning
 AI搜索功能需要配合 Cloudflare Workers 和 Vectorize 向量数据库使用，需要一定的技术基础。部署前请确保你已了解相关服务的配置方法。

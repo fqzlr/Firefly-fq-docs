@@ -1,8 +1,8 @@
-# 背景壁纸配置
+﻿# 背景壁纸配置
 
 背景壁纸配置文件用于设置博客的背景图片、显示模式、横幅效果等。
 
-配置文件路径：[backgroundWallpaper.ts](file:///e:/AItool/zzwork/my-blog/src/config/backgroundWallpaper.ts)
+配置文件路径：`backgroundWallpaper.ts`
 
 ## 基础配置
 

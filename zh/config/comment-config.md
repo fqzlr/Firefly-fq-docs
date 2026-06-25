@@ -1,8 +1,8 @@
-# 评论系统配置详解
+﻿# 评论系统配置详解
 
 评论系统配置文件用于设置博客使用的评论系统，支持多种主流评论系统。
 
-配置文件路径：[commentConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/commentConfig.ts)
+配置文件路径：`commentConfig.ts`
 
 ## 基础配置
 

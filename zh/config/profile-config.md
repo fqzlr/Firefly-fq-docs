@@ -1,8 +1,8 @@
-# 个人资料配置
+﻿# 个人资料配置
 
 个人资料配置文件用于设置侧边栏用户资料卡片的头像、昵称、签名、社交链接等信息。
 
-配置文件路径：[profileConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/profileConfig.ts)
+配置文件路径：`profileConfig.ts`
 
 ## 基本信息配置
 

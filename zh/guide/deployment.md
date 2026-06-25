@@ -1,10 +1,10 @@
-# 部署指南
+﻿# 部署指南
 
 Firefly 博客是纯静态站点，可以部署到任何支持静态文件托管的平台。本文档将详细介绍各种部署方式的配置方法。
 
 ::: tip 前置准备
 在部署之前，请确保：
-1. 已正确配置 [siteConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/siteConfig.ts) 中的 `site_url` 为你的实际域名
+1. 已正确配置 `siteConfig.ts` 中的 `site_url` 为你的实际域名
 2. 已安装项目依赖：`pnpm install`
 3. 本地构建测试通过：`pnpm build`
 :::
@@ -275,7 +275,7 @@ jobs:
 
 如果部署到 `https://username.github.io/repo-name/`，需要修改配置：
 
-[siteConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/siteConfig.ts):
+`siteConfig.ts`:
 ```typescript
 export const siteConfig: SiteConfig = {
   site_url: "https://username.github.io/repo-name/",
@@ -283,7 +283,7 @@ export const siteConfig: SiteConfig = {
 };
 ```
 
-[astro.config.mjs](file:///e:/AItool/zzwork/my-blog/astro.config.mjs):
+`astro.config.mjs`:
 ```javascript
 export default defineConfig({
   site: "https://username.github.io/repo-name/",
@@ -451,7 +451,7 @@ docker run -d -p 80:80 --name firefly-blog firefly-blog
 
 ## 环境变量
 
-可以在项目根目录创建 `.env` 文件来配置环境变量（参考 [.env.example](file:///e:/AItool/zzwork/my-blog/.env.example)）：
+可以在项目根目录创建 `.env` 文件来配置环境变量（参考 `.env.example`）：
 
 ```env
 # 示例环境变量
@@ -465,7 +465,7 @@ docker run -d -p 80:80 --name firefly-blog firefly-blog
 
 ## 缓存策略说明
 
-为了获得最佳性能，建议配置以下缓存策略（在 [astro.config.mjs](file:///e:/AItool/zzwork/my-blog/astro.config.mjs) 中有注释说明）：
+为了获得最佳性能，建议配置以下缓存策略（在 `astro.config.mjs` 中有注释说明）：
 
 | 路径 | Cache-Control | 说明 |
 |------|---------------|------|
@@ -516,7 +516,7 @@ NODE_OPTIONS=--max_old_space_size=4096 pnpm build
 
 **症状**: 部分外链图片显示 403 防盗链错误
 
-**解决方案**: 在 [siteConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/siteConfig.ts) 的 `imageOptimization.noReferrerDomains` 中添加相关域名：
+**解决方案**: 在 `siteConfig.ts` 的 `imageOptimization.noReferrerDomains` 中添加相关域名：
 
 ```typescript
 imageOptimization: {

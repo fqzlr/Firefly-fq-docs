@@ -1,4 +1,4 @@
-# 评论系统配置指南
+﻿# 评论系统配置指南
 
 Firefly 博客内置了多种评论系统支持，包括 Twikoo、Waline、Giscus、Artalk、Disqus 等。本文档将详细介绍如何配置和使用这些评论系统。
 
@@ -12,13 +12,13 @@ Firefly 博客内置了多种评论系统支持，包括 Twikoo、Waline、Giscu
 - 🔒 **单篇文章控制**：可在 Frontmatter 中单独关闭某篇文章的评论
 
 相关文件：
-- 配置文件：[commentConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/commentConfig.ts)
-- 评论入口组件：[comment/index.astro](file:///e:/AItool/zzwork/my-blog/src/components/comment/index.astro)
-- 各评论系统组件位于 [src/components/comment/](file:///e:/AItool/zzwork/my-blog/src/components/comment/) 目录
+- 配置文件：`commentConfig.ts`
+- 评论入口组件：`comment/index.astro`
+- 各评论系统组件位于 `src/components/comment/` 目录
 
 ## 基础配置
 
-评论系统配置文件位于 [src/config/commentConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/commentConfig.ts)。
+评论系统配置文件位于 `src/config/commentConfig.ts`。
 
 ### 选择评论系统
 
@@ -57,7 +57,7 @@ comment: false  # 设为 false 则本文不显示评论区
 
 除了文章页面，评论组件也用于留言板（Guestbook）页面。留言板功能需要先配置好评论系统才能正常使用。
 
-留言板页面开关在 [siteConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/siteConfig.ts) 中：
+留言板页面开关在 `siteConfig.ts` 中：
 
 ```typescript
 pages: {
@@ -108,7 +108,7 @@ Twikoo 支持多种部署方式，请参考 [Twikoo 官方文档](https://twikoo
 - ✅ 文章访问量统计
 - ✅ 暗色模式自适应
 
-相关组件：[Twikoo.astro](file:///e:/AItool/zzwork/my-blog/src/components/comment/Twikoo.astro)
+相关组件：`Twikoo.astro`
 
 ::: tip 静态资源说明
 项目使用了定制的 Twikoo JS 文件来修复一些交互问题，位于 `public/assets/js/twikoo.nocss.js`，样式文件位于 `public/assets/css/twikoo.css` 和 `public/assets/css/twikoo-custom.css`。
@@ -175,7 +175,7 @@ Waline 支持多种部署方式，请参考 [Waline 官方文档](https://waline
 - ✅ 图片上传
 - ✅ 暗色模式自适应
 
-相关组件：[Waline.astro](file:///e:/AItool/zzwork/my-blog/src/components/comment/Waline.astro)
+相关组件：`Waline.astro`
 
 ## Giscus 配置
 
@@ -251,7 +251,7 @@ export const commentConfig: CommentConfig = {
 - Discussion 功能需要在仓库设置中开启
 :::
 
-相关组件：[Giscus.astro](file:///e:/AItool/zzwork/my-blog/src/components/comment/Giscus.astro)
+相关组件：`Giscus.astro`
 
 ## Artalk 配置
 
@@ -302,7 +302,7 @@ docker run -d \
 - ✅ 暗色模式自适应
 - ✅ 文章访问量统计
 
-相关组件：[Artalk.astro](file:///e:/AItool/zzwork/my-blog/src/components/comment/Artalk.astro)
+相关组件：`Artalk.astro`
 
 ## Disqus 配置
 
@@ -343,7 +343,7 @@ export const commentConfig: CommentConfig = {
 - 数据存储在 Disqus 服务器
 :::
 
-相关组件：[Disqus.astro](file:///e:/AItool/zzwork/my-blog/src/components/comment/Disqus.astro)
+相关组件：`Disqus.astro`
 
 ## 评论系统对比
 
@@ -393,7 +393,7 @@ export const commentConfig: CommentConfig = {
 - 防止重复加载脚本和绑定事件
 - 正确传递页面路径参数
 
-相关组件入口：[comment/index.astro](file:///e:/AItool/zzwork/my-blog/src/components/comment/index.astro)
+相关组件入口：`comment/index.astro`
 
 ## 访问量统计
 
@@ -404,7 +404,7 @@ Twikoo、Waline、Artalk 都支持文章访问量统计功能：
 visitorCount: true
 ```
 
-访问量显示组件：[VisitorCount.astro](file:///e:/AItool/zzwork/my-blog/src/components/common/VisitorCount.astro)
+访问量显示组件：`VisitorCount.astro`
 
 ::: tip 说明
 - 访问量数据由评论系统后端存储和管理
@@ -470,13 +470,13 @@ visitorCount: true
 
 | 文件 | 说明 |
 |------|------|
-| [commentConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/commentConfig.ts) | 评论系统配置文件 |
-| [comment/index.astro](file:///e:/AItool/zzwork/my-blog/src/components/comment/index.astro) | 评论组件入口（根据配置加载对应系统） |
-| [Twikoo.astro](file:///e:/AItool/zzwork/my-blog/src/components/comment/Twikoo.astro) | Twikoo 评论组件 |
-| [Waline.astro](file:///e:/AItool/zzwork/my-blog/src/components/comment/Waline.astro) | Waline 评论组件 |
-| [Giscus.astro](file:///e:/AItool/zzwork/my-blog/src/components/comment/Giscus.astro) | Giscus 评论组件 |
-| [Artalk.astro](file:///e:/AItool/zzwork/my-blog/src/components/comment/Artalk.astro) | Artalk 评论组件 |
-| [Disqus.astro](file:///e:/AItool/zzwork/my-blog/src/components/comment/Disqus.astro) | Disqus 评论组件 |
-| [VisitorCount.astro](file:///e:/AItool/zzwork/my-blog/src/components/common/VisitorCount.astro) | 访问量统计组件 |
-| [twikoo-custom.css](file:///e:/AItool/zzwork/my-blog/public/assets/css/twikoo-custom.css) | Twikoo 自定义样式 |
-| [twikoo.css](file:///e:/AItool/zzwork/my-blog/public/assets/css/twikoo.css) | Twikoo 基础样式 |
+| `commentConfig.ts` | 评论系统配置文件 |
+| `comment/index.astro` | 评论组件入口（根据配置加载对应系统） |
+| `Twikoo.astro` | Twikoo 评论组件 |
+| `Waline.astro` | Waline 评论组件 |
+| `Giscus.astro` | Giscus 评论组件 |
+| `Artalk.astro` | Artalk 评论组件 |
+| `Disqus.astro` | Disqus 评论组件 |
+| `VisitorCount.astro` | 访问量统计组件 |
+| `twikoo-custom.css` | Twikoo 自定义样式 |
+| `twikoo.css` | Twikoo 基础样式 |

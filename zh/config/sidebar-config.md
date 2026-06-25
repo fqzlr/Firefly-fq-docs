@@ -1,8 +1,8 @@
-# 侧边栏配置
+﻿# 侧边栏配置
 
 侧边栏配置文件用于设置博客侧边栏的布局、位置和组件显示。
 
-配置文件路径：[sidebarConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/sidebarConfig.ts)
+配置文件路径：`sidebarConfig.ts`
 
 ## 侧边栏布局配置
 

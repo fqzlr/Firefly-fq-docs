@@ -1,8 +1,8 @@
-# 技能图标配置详解
+﻿# 技能图标配置详解
 
 技能图标配置文件用于设置"关于"页面展示的技能图标，包括图标选择、分组和配色。
 
-配置文件路径：[skillsConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/skillsConfig.ts)
+配置文件路径：`skillsConfig.ts`
 
 ## 配置项说明
 

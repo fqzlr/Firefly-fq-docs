@@ -1,4 +1,4 @@
-# 文章写作指南
+﻿# 文章写作指南
 
 Firefly 博客使用 Astro Content Collections 管理文章内容，支持 Markdown 和 MDX 两种格式。本文档将详细介绍如何创建和编写博客文章，包括 Frontmatter 配置、Markdown 语法扩展、特殊功能等。
 
@@ -24,7 +24,7 @@ pnpm new-post blog/tech-tutorial
 # 会创建 src/content/posts/blog/tech-tutorial.md
 ```
 
-新文章会自动生成基础的 Frontmatter 模板，脚本位于 [new-post.js](file:///e:/AItool/zzwork/my-blog/scripts/new-post.js)。
+新文章会自动生成基础的 Frontmatter 模板，脚本位于 `new-post.js`。
 
 ### 手动创建文章
 
@@ -135,7 +135,7 @@ nextSlug: ""
 | `licenseUrl` | string | 版权协议链接 |
 | `sourceLink` | string | 原文链接，用于转载文章标注来源 |
 
-可以在 [licenseConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/licenseConfig.ts) 中配置默认版权信息。
+可以在 `licenseConfig.ts` 中配置默认版权信息。
 
 #### URL 别名
 
@@ -175,13 +175,13 @@ passwordHint: "密码提示信息"
 - `password`: 访问密码
 - `passwordHint`: 可选，密码提示信息
 
-加密文章在客户端使用 AES 解密，用户输入正确密码后才能查看内容。相关组件：[EncryptedPost.astro](file:///e:/AItool/zzwork/my-blog/src/components/features/EncryptedPost.astro)
+加密文章在客户端使用 AES 解密，用户输入正确密码后才能查看内容。相关组件：`EncryptedPost.astro`
 
 ::: warning 安全提示
 客户端加密不能替代服务器端访问控制，敏感内容请勿仅依赖此功能。密码验证在浏览器端进行，不能完全阻止技术手段绕过。
 :::
 
-Content Schema 定义在 [content.config.ts](file:///e:/AItool/zzwork/my-blog/src/content.config.ts) 中，包含完整的类型验证。
+Content Schema 定义在 `content.config.ts` 中，包含完整的类型验证。
 
 ## Markdown 基础语法
 
@@ -301,7 +301,7 @@ Firefly 内置了多种 Markdown 扩展功能。
 
 ### 提醒框（Admonitions/Callouts）
 
-支持多种风格的提醒框，在 [siteConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/siteConfig.ts) 中配置主题：
+支持多种风格的提醒框，在 `siteConfig.ts` 中配置主题：
 
 ```typescript
 rehypeCallouts: {
@@ -402,7 +402,7 @@ $$
 $$
 ```
 
-相关配置：[KatexManager.astro](file:///e:/AItool/zzwork/my-blog/src/components/features/KatexManager.astro)
+相关配置：`KatexManager.astro`
 
 ### Mermaid 图表
 
@@ -441,7 +441,7 @@ Bob --> Alice: Hi!
 ```
 ````
 
-相关配置：[plantumlConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/plantumlConfig.ts)
+相关配置：`plantumlConfig.ts`
 
 ### 代码块增强
 
@@ -491,7 +491,7 @@ function demo() {
 
 代码块右上角自动显示语言标识。
 
-相关配置：[expressiveCodeConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/expressiveCodeConfig.ts)
+相关配置：`expressiveCodeConfig.ts`
 
 ### 图片网格
 
@@ -509,7 +509,7 @@ function demo() {
 
 文章中的图片默认支持点击放大查看（Fancybox），无需额外配置。
 
-相关组件：[FancyboxManager.astro](file:///e:/AItool/zzwork/my-blog/src/components/features/FancyboxManager.astro)
+相关组件：`FancyboxManager.astro`
 
 ### 目录（TOC）
 
@@ -552,7 +552,7 @@ import MyComponent from "@components/some/Component.astro";
 
 ### 文章目录结构
 
-文章存放在 [src/content/posts/](file:///e:/AItool/zzwork/my-blog/src/content/posts/) 目录下，可以创建子目录分类组织：
+文章存放在 `src/content/posts/` 目录下，可以创建子目录分类组织：
 
 ```
 src/content/posts/
@@ -579,13 +579,13 @@ src/content/posts/
 
 | 集合 | 目录 | 用途 |
 |------|------|------|
-| `spec` | [src/content/spec/](file:///e:/AItool/zzwork/my-blog/src/content/spec/) | 特殊页面（关于、友链等） |
-| `moments` | [src/content/moments/](file:///e:/AItool/zzwork/my-blog/src/content/moments/) | 动态/说说 |
-| `bangumi` | [src/content/bangumi/](file:///e:/AItool/zzwork/my-blog/src/content/bangumi/) | 番剧/影视/书籍/音乐 |
-| `changelog` | [src/content/changelog/](file:///e:/AItool/zzwork/my-blog/src/content/changelog/) | 更新日志 |
-| `life` | [src/content/life/](file:///e:/AItool/zzwork/my-blog/src/content/life/) | 生活记录 |
+| `spec` | `src/content/spec/` | 特殊页面（关于、友链等） |
+| `moments` | `src/content/moments/` | 动态/说说 |
+| `bangumi` | `src/content/bangumi/` | 番剧/影视/书籍/音乐 |
+| `changelog` | `src/content/changelog/` | 更新日志 |
+| `life` | `src/content/life/` | 生活记录 |
 
-所有集合的 Schema 定义在 [content.config.ts](file:///e:/AItool/zzwork/my-blog/src/content.config.ts)。
+所有集合的 Schema 定义在 `content.config.ts`。
 
 ## 写作技巧
 
@@ -697,13 +697,13 @@ draft: true
 
 | 文件 | 说明 |
 |------|------|
-| [content.config.ts](file:///e:/AItool/zzwork/my-blog/src/content.config.ts) | 内容集合 Schema 定义 |
-| [new-post.js](file:///e:/AItool/zzwork/my-blog/scripts/new-post.js) | 新建文章脚本 |
-| [astro.config.mjs](file:///e:/AItool/zzwork/my-blog/astro.config.mjs) | Markdown 插件配置 |
-| [src/content/posts/](file:///e:/AItool/zzwork/my-blog/src/content/posts/) | 文章存放目录 |
-| [markdown-tutorial.md](file:///e:/AItool/zzwork/my-blog/src/content/posts/markdown-tutorial.md) | Markdown 基础教程示例 |
-| [markdown-extended.md](file:///e:/AItool/zzwork/my-blog/src/content/posts/markdown-extended.md) | Markdown 扩展功能示例 |
-| [EncryptedPost.astro](file:///e:/AItool/zzwork/my-blog/src/components/features/EncryptedPost.astro) | 加密文章组件 |
-| [licenseConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/licenseConfig.ts) | 默认版权配置 |
-| [expressiveCodeConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/expressiveCodeConfig.ts) | 代码高亮配置 |
-| [plantumlConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/plantumlConfig.ts) | PlantUML 配置 |
+| `content.config.ts` | 内容集合 Schema 定义 |
+| `new-post.js` | 新建文章脚本 |
+| `astro.config.mjs` | Markdown 插件配置 |
+| `src/content/posts/` | 文章存放目录 |
+| `markdown-tutorial.md` | Markdown 基础教程示例 |
+| `markdown-extended.md` | Markdown 扩展功能示例 |
+| `EncryptedPost.astro` | 加密文章组件 |
+| `licenseConfig.ts` | 默认版权配置 |
+| `expressiveCodeConfig.ts` | 代码高亮配置 |
+| `plantumlConfig.ts` | PlantUML 配置 |

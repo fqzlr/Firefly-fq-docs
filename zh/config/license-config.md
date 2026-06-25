@@ -1,8 +1,8 @@
-# 许可证配置详解
+﻿# 许可证配置详解
 
 许可证配置文件用于设置文章顶部的版权许可证信息显示。
 
-配置文件路径：[licenseConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/licenseConfig.ts)
+配置文件路径：`licenseConfig.ts`
 
 ## 基本配置
 

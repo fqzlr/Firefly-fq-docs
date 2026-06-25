@@ -1,8 +1,8 @@
-# 代码块配置详解
+﻿# 代码块配置详解
 
 代码块配置文件用于设置代码高亮主题、代码折叠、语言徽章等 expressive-code 插件功能。
 
-配置文件路径：[expressiveCodeConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/expressiveCodeConfig.ts)
+配置文件路径：`expressiveCodeConfig.ts`
 
 ::: tip
 修改本配置后需要重启 Astro 开发服务器才能生效。

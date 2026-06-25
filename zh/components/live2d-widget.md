@@ -1,12 +1,12 @@
-# Live2D/Spine 看板娘组件
+﻿# Live2D/Spine 看板娘组件
 
 看板娘组件支持 Live2D 和 Spine 两种模型格式，提供可交互的虚拟角色，支持点击触发动作、消息气泡、拖拽移动等功能。
 
 组件文件：
-- [Live2DWidget.astro](file:///e:/AItool/zzwork/my-blog/src/components/features/Live2DWidget.astro) - Live2D 看板娘组件
-- [SpineModel.astro](file:///e:/AItool/zzwork/my-blog/src/components/features/SpineModel.astro) - Spine 看板娘组件
+- `Live2DWidget.astro` - Live2D 看板娘组件
+- `SpineModel.astro` - Spine 看板娘组件
 
-配置文件：[pioConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/pioConfig.ts)
+配置文件：`pioConfig.ts`
 
 ## 组件概述
 

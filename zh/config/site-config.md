@@ -1,8 +1,8 @@
-# 站点配置详解
+﻿# 站点配置详解
 
 站点配置文件用于设置博客的基本信息、主题、布局、功能开关等全局配置。
 
-配置文件路径：[siteConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/siteConfig.ts)
+配置文件路径：`siteConfig.ts`
 
 ## 基本信息配置
 

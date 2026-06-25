@@ -1,8 +1,8 @@
-# 公告配置详解
+﻿# 公告配置详解
 
 公告配置文件用于设置侧边栏公告组件的标题、公告列表和关闭功能。
 
-配置文件路径：[announcementConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/announcementConfig.ts)
+配置文件路径：`announcementConfig.ts`
 
 ## 基本配置
 

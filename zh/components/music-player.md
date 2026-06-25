@@ -1,10 +1,10 @@
-# 音乐播放器组件
+﻿# 音乐播放器组件
 
 音乐播放器组件提供了完整的音乐播放功能，支持 Meting API 和本地音乐两种模式，包含歌词显示、播放列表、播放控制等功能。
 
 组件文件：
-- [MusicManager.astro](file:///e:/AItool/zzwork/my-blog/src/components/features/MusicManager.astro) - 音乐管理器（核心逻辑）
-- [MusicPlayer.astro](file:///e:/AItool/zzwork/my-blog/src/components/features/MusicPlayer.astro) - 播放器 UI 组件
+- `MusicManager.astro` - 音乐管理器（核心逻辑）
+- `MusicPlayer.astro` - 播放器 UI 组件
 
 配置文档：[音乐播放器配置详解](../config/music-config.md)
 

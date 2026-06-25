@@ -1,8 +1,8 @@
-# 字体配置
+﻿# 字体配置
 
 字体配置文件用于设置博客使用的字体，支持自定义字体、CDN 字体和本地字体。
 
-配置文件路径：[fontConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/fontConfig.ts)
+配置文件路径：`fontConfig.ts`
 
 ## 基础配置
 

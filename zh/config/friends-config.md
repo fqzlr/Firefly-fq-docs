@@ -1,10 +1,10 @@
-# 友链配置详解
+﻿# 友链配置详解
 
 友链配置文件用于管理友链页面的显示设置和友链列表，同时支持通过 GitHub Gist 管理外部友链数据源。
 
 配置文件路径：
-- [friendsConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/friendsConfig.ts) - 本地友链配置
-- [externalFriendsConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/externalFriendsConfig.ts) - 外部友链数据源配置
+- `friendsConfig.ts` - 本地友链配置
+- `externalFriendsConfig.ts` - 外部友链数据源配置
 
 ## 友链页面配置
 
@@ -63,7 +63,7 @@
 
 ## 外部友链数据源配置
 
-基于 GitHub Gist 的外部友链数据源，可在不修改代码的情况下更新友链。
+基于 GitHub Gist 的外部友链数据源，可在不修改代码的情况下更新友链，支持通过后台管理面板在线添加、编辑、删除友链。
 
 | 配置项 | 类型 | 默认值 | 说明 |
 |--------|------|--------|------|
@@ -73,10 +73,11 @@
 
 ### 使用方法
 
-1. 在 [GitHub Gist](https://gist.github.com/) 创建一个名为 `friends.json` 的文件
-2. 将友链数据按 JSON 格式写入（格式与本地配置一致）
-3. 从 Gist URL 中获取 Gist ID（如 `https://gist.github.com/user/abc123` 中的 `abc123`）
-4. 将 Gist ID 填入 `gistId` 字段
+1. 在 [GitHub Gist](https://gist.github.com/) 创建一个名为 `friends.json` 的 **Secret Gist**，初始内容 `[]`
+2. 从 Gist URL 中获取 Gist ID（如 `https://gist.github.com/user/abc123` 中的 `abc123`）
+3. 将 Gist ID 填入 `gistId` 字段
+4. 登录后台 `/admin/` →「🔧 接口配置」保存 GitHub Token（与说说、笔记等共用）
+5. 进入「友情链接」页面即可在线管理友链
 
 ### friends.json 格式示例
 

@@ -1,8 +1,8 @@
-# 音乐播放器配置详解
+﻿# 音乐播放器配置详解
 
 音乐播放器配置文件用于设置博客音乐播放器的播放模式、音乐来源、音量、歌词等功能。
 
-配置文件路径：[musicConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/musicConfig.ts)
+配置文件路径：`musicConfig.ts`
 
 组件文档：[音乐播放器组件](../components/music-player.md)
 

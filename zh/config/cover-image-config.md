@@ -1,8 +1,8 @@
-# 封面图片配置
+﻿# 封面图片配置
 
 封面图片配置文件用于设置文章封面图的显示和随机封面图功能。
 
-配置文件路径：[coverImageConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/coverImageConfig.ts)
+配置文件路径：`coverImageConfig.ts`
 
 ## 基础配置
 

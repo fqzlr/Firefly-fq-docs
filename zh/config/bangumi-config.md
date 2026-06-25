@@ -1,8 +1,8 @@
-# 影视追番配置详解
+﻿# 影视追番配置详解
 
 影视追番配置文件用于配置基于 GitHub Gist 的外部影视数据源，可在不修改代码的情况下更新番剧、电影、书籍、游戏、音乐等收藏内容。
 
-配置文件路径：[externalBangumiConfig.ts](file:///e:/AItool/zzwork/my-blog/src/config/externalBangumiConfig.ts)
+配置文件路径：`externalBangumiConfig.ts`
 
 ## 基本配置
 
@@ -17,9 +17,8 @@
 ### 1. 创建 GitHub Gist
 
 1. 访问 [GitHub Gist](https://gist.github.com/)
-2. 创建一个新的 Gist，文件名填写 `bangumi.json`
-3. 按照下面的格式添加影视数据
-4. 创建后从 URL 中获取 Gist ID（如 `https://gist.github.com/user/abc123` 中的 `abc123`）
+2. 创建一个新的 **Secret Gist**，文件名填写 `bangumi.json`，初始内容 `{}`
+3. 创建后从 URL 中获取 Gist ID（如 `https://gist.github.com/user/abc123` 中的 `abc123`）
 
 ### 2. 配置 Gist ID
 
@@ -33,7 +32,13 @@ export const externalBangumiConfig = {
 };
 ```
 
-### 3. bangumi.json 数据格式
+### 3. 配置 Token 并使用后台管理
+
+1. 登录后台 `/admin/`，进入「🔧 接口配置」保存 GitHub Token（与说说、笔记等共用，需 `gist` 权限）
+2. 进入「影视追番」页面即可在线搜索、添加、编辑、删除影视条目
+3. 支持 TMDB、豆瓣、Bangumi 多源搜索，点击结果自动填充信息
+
+### 4. bangumi.json 数据格式
 
 数据按分类组织，支持以下分类：
 - `anime` - 番剧/动画

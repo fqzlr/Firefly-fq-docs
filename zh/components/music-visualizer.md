@@ -1,10 +1,10 @@
-# 3D音乐可视化组件
+﻿# 3D音乐可视化组件
 
 3D 音乐可视化组件基于 Three.js 实现，提供沉浸式的音乐可视化效果，支持音频频谱分析、3D 场景渲染、歌词叠加显示等功能。
 
 组件文件：
-- [MusicVisualizer.svelte](file:///e:/AItool/zzwork/my-blog/src/components/features/music-visualizer/MusicVisualizer.svelte) - 主组件
-- [VisualizerControls.svelte](file:///e:/AItool/zzwork/my-blog/src/components/features/music-visualizer/VisualizerControls.svelte) - 控制面板
+- `MusicVisualizer.svelte` - 主组件
+- `VisualizerControls.svelte` - 控制面板
 - 相关组件：ThreeScene.svelte、LyricsOverlay.svelte、AudioAnalyzer.ts
 
 配置文档：[音乐播放器配置详解](../config/music-config.md)
