@@ -1,16 +1,16 @@
 import { defineConfig } from 'vitepress'
 
 /**
- * Firefly Blog VitePress 文档配置
- * 
- * 这是一个基于 Astro 框架构建的现代化个人博客主题的文档站点配置
- * 使用 VitePress 作为静态文档生成器
+ * Fqzlr 博客 VitePress 文档配置
+ *
+ * 这是 Fqzlr 个人博客的使用文档站点配置
+ * 基于 Firefly 主题二次开发，使用 VitePress 作为静态文档生成器
  */
 export default defineConfig({
-  title: 'Firefly Blog 文档',
-  description: '基于 Astro 框架的清新美观现代化个人博客主题文档',
+  title: 'Fqzlr 博客文档',
+  description: '基于 Firefly 主题二次开发的个人博客使用文档',
   lang: 'zh-CN',
-  
+
   head: [
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
     ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
@@ -21,10 +21,11 @@ export default defineConfig({
       { text: '指南', link: '/zh/guide/getting-started', activeMatch: '/zh/guide/' },
       { text: '配置', link: '/zh/config/site-config', activeMatch: '/zh/config/' },
       { text: '组件', link: '/zh/components/music-player', activeMatch: '/zh/components/' },
-      { 
-        text: '相关链接', 
+      {
+        text: '相关链接',
         items: [
-          { text: 'GitHub', link: 'https://github.com/fqzlr/my-blog' },
+          { text: 'GitHub 仓库', link: 'https://github.com/fqzlr/fqzlr-bk' },
+          { text: '博客站点', link: 'https://fqzlr.com' },
           { text: 'Astro 官方文档', link: 'https://astro.build' },
           { text: 'VitePress 官方文档', link: 'https://vitepress.dev' }
         ]
@@ -118,13 +119,13 @@ export default defineConfig({
 
     // 社交链接
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/fqzlr/my-blog' }
+      { icon: 'github', link: 'https://github.com/fqzlr/fqzlr-bk' }
     ],
 
     // 页脚配置
     footer: {
       message: '基于 MIT 许可证发布',
-      copyright: 'Copyright © 2024-present Firefly Blog'
+      copyright: 'Copyright © 2026 Fqzlr 的博客'
     },
 
     // 搜索配置

@@ -1,86 +1,174 @@
-﻿# 相册配置详解
+# 相册配置详解
 
-相册配置文件用于管理相册列表、瀑布流布局和网络相册设置。
+相册功能用于展示图片集合，支持标签分类、地点信息、照片说明等。
 
-配置文件路径：`galleryConfig.ts`
+数据目录：`src/content/album/`
+图片目录：`public/gallery/`
 
-## 基本配置
+Schema 定义：`src/content.config.ts` 中的 `albumCollection`
 
-| 配置项 | 类型 | 默认值 | 说明 |
-|--------|------|--------|------|
-| `columnWidth` | `number` | `240` | 瀑布流最小列宽（px），浏览器根据容器宽度自动计算列数 |
+## 数据格式
 
-::: tip
-`columnWidth` 值越小列数越多，值越大列数越少。建议在 200-320 之间调整。
-:::
+每个相册为一个独立的 `.md` 或 `.json` 文件，通过 frontmatter 配置元数据，正文为相册描述（支持 Markdown）。
 
-## 网络相册配置
+## Frontmatter 字段
 
-| 配置项 | 类型 | 默认值 | 说明 |
-|--------|------|--------|------|
-| `networkAlbum.maxQuantity` | `number` | `10` | 单次获取图片数量上限 |
-| `networkAlbum.defaultQuantity` | `number` | `6` | 默认加载图片数量 |
+| 字段 | 类型 | 必填 | 默认值 | 说明 |
+|------|------|------|--------|------|
+| `title` | `string` | 是 | - | 相册标题 |
+| `subtitle` | `string` | 否 | `""` | 相册副标题 |
+| `cover` | `string` | 否 | - | 封面图片路径 |
+| `date` | `date` | 是 | - | 相册日期，用于排序 |
+| `location` | `string` | 否 | `""` | 拍摄地点 |
+| `photos` | `Photo[]` | 否 | `[]` | 照片列表 |
+| `tags` | `string[]` | 否 | `[]` | 标签数组 |
+| `draft` | `boolean` | 否 | `false` | 是否为草稿 |
 
-## 相册列表配置
+## Photos 字段说明
 
-`albums` 数组配置所有相册，每个相册包含：
+`photos` 字段支持两种格式：
 
-| 字段 | 类型 | 必填 | 说明 |
+### 1. 字符串格式（推荐）
+
+直接写图片路径：
+
+```yaml
+photos:
+  - /gallery/album-name/photo1.webp
+  - /gallery/album-name/photo2.webp
+```
+
+### 2. 对象格式
+
+支持设置 alt 和 caption：
+
+```yaml
+photos:
+  - src: /gallery/album-name/photo1.webp
+    alt: 照片1描述
+    caption: 照片1标题
+  - src: /gallery/album-name/photo2.webp
+    alt: 照片2描述
+    caption: 照片2标题
+```
+
+对象格式支持的属性：
+
+| 属性 | 类型 | 必填 | 说明 |
 |------|------|------|------|
-| `id` | `string` | 是 | 相册唯一标识符，用于目录命名和 URL 路径 |
-| `name` | `string` | 是 | 相册显示名称 |
-| `description` | `string` | 是 | 相册描述 |
-| `location` | `string` | 否 | 拍摄地点 |
-| `date` | `string` | 是 | 相册日期，格式 `YYYY-MM-DD`，用于排序 |
-| `tags` | `string[]` | 否 | 相册标签，用于分类过滤 |
-| `cover` | `string` | 否 | 手动指定封面图路径，不填则自动寻找 |
+| `src` | `string` | 是 | 图片路径 |
+| `alt` | `string` | 否 | 图片替代文本 |
+| `caption` | `string` | 否 | 图片说明文字 |
 
-### 相册目录结构
+## 图片存放位置
 
-每个相册需要在 `public/gallery/` 目录下创建对应的子目录，目录名与 `id` 一致：
+相册图片放置在 `public/gallery/` 目录下，建议每个相册创建独立的子目录：
 
 ```
 public/gallery/
-├── ai-2026/          # 对应 id: "ai-2026"
-│   ├── 1.webp
-│   ├── 2.webp
+├── ai-2026/
+│   ├── 001.webp
+│   ├── 002.webp
 │   └── ...
-└── gpt-img2-2026/    # 对应 id: "gpt-img2-2026"
-    ├── cover.jpg     # 封面图（可选）
+├── mc-2026/
+│   ├── 00001.webp
+│   └── ...
+└── gpt-img2-2026/
     ├── 1.webp
     └── ...
 ```
 
-### 封面图规则
+::: tip
+图片路径以 `/gallery/` 开头表示 `public/gallery/` 目录。
+:::
 
-- 如果设置了 `cover` 字段，使用指定图片
-- 否则查找目录下的 `cover.*` 文件（cover.jpg、cover.png、cover.webp 等）
-- 如果没有封面文件，则使用目录下第一张图片作为封面
+## 封面图规则
 
-### 示例：添加相册
+- 如果设置了 `cover` 字段，使用指定图片作为封面
+- 如果没有设置 `cover`，使用 `photos` 数组中的第一张图片作为封面
 
-```ts
-albums: [
-  {
-    id: "travel-2024",
-    name: "2024 旅行记录",
-    description: "今年去过的地方",
-    location: "云南",
-    date: "2024-07-15",
-    tags: ["旅行", "风景"],
-  },
-  {
-    id: "daily-2024",
-    name: "日常随拍",
-    description: "生活中的小美好",
-    date: "2024-01-01",
-    tags: ["日常"],
-    cover: "/gallery/daily-2024/cover.jpg",
-  },
-],
+## 示例
+
+### 基础相册
+
+```markdown
+---
+title: 2024 旅行记录
+subtitle: 今年去过的地方
+cover: /gallery/travel-2024/cover.webp
+date: 2024-07-15
+location: 云南
+tags:
+  - 旅行
+  - 风景
+photos:
+  - /gallery/travel-2024/1.webp
+  - /gallery/travel-2024/2.webp
+  - /gallery/travel-2024/3.webp
+draft: false
+---
+
+这是 2024 年夏天去云南旅行的照片合集~
 ```
 
-### 支持的图片格式
+### 带详细说明的相册
+
+```markdown
+---
+title: GPT生图
+subtitle: GPT生成的图片
+cover: /gallery/gpt-img2-2026/1.webp
+date: 2026-05-24
+location: gpt
+tags:
+  - AI
+  - GPT生图
+photos:
+  - src: /gallery/gpt-img2-2026/1.webp
+    alt: AI生成的风景图
+    caption: 梦幻山谷
+  - src: /gallery/gpt-img2-2026/2.webp
+    alt: AI生成的人物图
+    caption: 未来少女
+draft: false
+---
+
+GPT 生成的各种风格的图片
+```
+
+### 草稿相册
+
+设置 `draft: true` 的相册不会在页面上显示：
+
+```markdown
+---
+title: 未完成的相册
+date: 2024-06-01
+tags:
+  - 草稿
+photos: []
+draft: true
+---
+
+这个相册还在整理中...
+```
+
+## 文件命名规范
+
+建议使用有意义的名称作为文件名：
+
+```
+src/content/album/
+├── 旅行2024.md
+├── 日常生活.md
+└── AI生图.md
+```
+
+## 排序规则
+
+相册按 `date` 字段降序排列，最新的相册显示在最前面。
+
+## 支持的图片格式
 
 - JPG / JPEG
 - PNG
@@ -89,8 +177,8 @@ albums: [
 - GIF（动图）
 
 ::: tip
-- 图片建议使用 WebP 或 AVIF 格式以减小加载体积
-- 相册按 `date` 降序排列，最新的相册显示在前面
-- 本地相册图片会在构建时被 Astro 自动优化
-- 网络相册功能需要额外配置 API 接口
+- 图片建议使用 WebP 格式以减小加载体积
+- 相册按 `date` 降序排列，最新的显示在前面
+- 本地图片会在构建时被 Astro 自动优化
+- 草稿相册（`draft: true`）不会被展示
 :::

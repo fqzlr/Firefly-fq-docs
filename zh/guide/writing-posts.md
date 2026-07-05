@@ -1,4 +1,4 @@
-﻿# 文章写作指南
+# 文章写作指南
 
 Firefly 博客使用 Astro Content Collections 管理文章内容，支持 Markdown 和 MDX 两种格式。本文档将详细介绍如何创建和编写博客文章，包括 Frontmatter 配置、Markdown 语法扩展、特殊功能等。
 
@@ -24,7 +24,7 @@ pnpm new-post blog/tech-tutorial
 # 会创建 src/content/posts/blog/tech-tutorial.md
 ```
 
-新文章会自动生成基础的 Frontmatter 模板，脚本位于 `new-post.js`。
+新文章会自动生成基础的 Frontmatter 模板，脚本位于 `scripts/new-post/index.js`。
 
 ### 手动创建文章
 
@@ -44,7 +44,7 @@ src/content/posts/
 
 ### 完整字段说明
 
-以下是文章 Frontmatter 支持的所有字段：
+以下是文章 Frontmatter 支持的所有字段（基于 `content.config.ts` 中的 Schema 定义）：
 
 ```yaml
 ---
@@ -65,18 +65,12 @@ pinned: false                      # 是否置顶
 author: "作者名"                    # 文章作者
 lang: "zh-CN"                      # 文章语言
 comment: true                      # 是否启用评论
+order: 0                           # 排序权重（数值越大越靠前）
 
 # SEO 和版权
 licenseName: "CC BY-NC-SA 4.0"    # 版权协议名称
 licenseUrl: "https://..."          # 版权协议链接
 sourceLink: "https://..."          # 原文链接（转载文章）
-
-# 高级功能
-alias: "custom-url-slug"           # 自定义 URL 别名
-order: 0                           # 排序权重（数值越大越靠前）
-encrypted: false                   # 是否加密文章
-password: "your-password"          # 加密文章密码
-passwordHint: "密码提示"           # 密码提示
 
 # 内部使用字段（通常不需要手动设置）
 prevTitle: ""
@@ -136,50 +130,6 @@ nextSlug: ""
 | `sourceLink` | string | 原文链接，用于转载文章标注来源 |
 
 可以在 `licenseConfig.ts` 中配置默认版权信息。
-
-#### URL 别名
-
-使用 `alias` 字段可以自定义文章 URL：
-
-```yaml
----
-title: "我的特殊文章"
-alias: "my-custom-slug"
----
-```
-
-设置后文章可通过 `/posts/my-custom-slug/` 访问。
-
-::: warning 注意事项
-- 别名不要包含 `/posts/` 前缀（会自动添加）
-- 别名中避免使用特殊字符和空格
-- 建议使用小写字母和连字符，利于 SEO
-- 确保所有文章别名唯一
-- 不要包含前导或尾部斜杠
-:::
-
-#### 加密文章
-
-Firefly 支持文章密码保护功能：
-
-```yaml
----
-title: "加密文章示例"
-encrypted: true
-password: "your-password"
-passwordHint: "密码提示信息"
----
-```
-
-- `encrypted`: 设为 `true` 启用加密
-- `password`: 访问密码
-- `passwordHint`: 可选，密码提示信息
-
-加密文章在客户端使用 AES 解密，用户输入正确密码后才能查看内容。相关组件：`EncryptedPost.astro`
-
-::: warning 安全提示
-客户端加密不能替代服务器端访问控制，敏感内容请勿仅依赖此功能。密码验证在浏览器端进行，不能完全阻止技术手段绕过。
-:::
 
 Content Schema 定义在 `content.config.ts` 中，包含完整的类型验证。
 
@@ -579,11 +529,18 @@ src/content/posts/
 
 | 集合 | 目录 | 用途 |
 |------|------|------|
-| `spec` | `src/content/spec/` | 特殊页面（关于、友链等） |
+| `spec` | `src/content/spec/` | 特殊页面（关于、友链、留言板、项目等） |
 | `moments` | `src/content/moments/` | 动态/说说 |
-| `bangumi` | `src/content/bangumi/` | 番剧/影视/书籍/音乐 |
+| `bangumi` | `src/content/bangumi/` | 番剧/影视/书籍/音乐/游戏 |
 | `changelog` | `src/content/changelog/` | 更新日志 |
-| `life` | `src/content/life/` | 生活记录 |
+| `life` | `src/content/life/` | 生活记录（元数据、足迹等） |
+| `notebooks` | `src/content/life/notebooks/` | 笔记本（日记、随笔等） |
+| `routines` | `src/content/life/routines/` | 日常规划/作息时间表 |
+| `album` | `src/content/album/` | 相册 |
+| `daohang` | `src/content/daohang/` | 网址导航 |
+| `friends` | `src/content/friends/` | 友情链接 |
+| `ziyuan` | `src/content/ziyuan/` | 资源（公告、每日名言等） |
+| `danmu` | `src/content/danmu/` | 弹幕数据 |
 
 所有集合的 Schema 定义在 `content.config.ts`。
 
@@ -698,12 +655,9 @@ draft: true
 | 文件 | 说明 |
 |------|------|
 | `content.config.ts` | 内容集合 Schema 定义 |
-| `new-post.js` | 新建文章脚本 |
+| `scripts/new-post/index.js` | 新建文章脚本 |
 | `astro.config.mjs` | Markdown 插件配置 |
 | `src/content/posts/` | 文章存放目录 |
-| `markdown-tutorial.md` | Markdown 基础教程示例 |
-| `markdown-extended.md` | Markdown 扩展功能示例 |
-| `EncryptedPost.astro` | 加密文章组件 |
-| `licenseConfig.ts` | 默认版权配置 |
-| `expressiveCodeConfig.ts` | 代码高亮配置 |
-| `plantumlConfig.ts` | PlantUML 配置 |
+| `src/config/licenseConfig.ts` | 默认版权配置 |
+| `src/config/expressiveCodeConfig.ts` | 代码高亮配置 |
+| `src/plugins/` | Markdown 插件目录 |

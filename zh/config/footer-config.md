@@ -1,8 +1,8 @@
-﻿# 页脚配置详解
+# 页脚配置详解
 
 页脚配置文件用于启用自定义页脚 HTML 内容注入功能。
 
-配置文件路径：`footerConfig.ts`
+配置文件路径：`src/config/footerConfig.ts`
 
 ## 基本配置
 

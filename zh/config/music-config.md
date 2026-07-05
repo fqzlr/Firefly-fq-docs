@@ -1,8 +1,8 @@
-﻿# 音乐播放器配置详解
+# 音乐播放器配置详解
 
 音乐播放器配置文件用于设置博客音乐播放器的播放模式、音乐来源、音量、歌词等功能。
 
-配置文件路径：`musicConfig.ts`
+配置文件路径：`src/config/musicConfig.ts`
 
 组件文档：[音乐播放器组件](../components/music-player.md)
 
@@ -11,8 +11,8 @@
 | 配置项 | 类型 | 默认值 | 说明 |
 |--------|------|--------|------|
 | `showInNavbar` | `boolean` | `true` | 是否在导航栏显示音乐播放器入口 |
-| `mode` | `"meting" \| "local"` | `"meting"` | 音乐来源模式：`meting` 使用 Meting API，`local` 使用本地音乐列表 |
-| `volume` | `number` | `0.6` | 默认音量，范围 0-1 |
+| `mode` | `"meting" \| "local"` | `"local"` | 音乐来源模式：`meting` 使用 Meting API，`local` 使用本地音乐列表 |
+| `volume` | `number` | `0.7` | 默认音量，范围 0-1 |
 | `playMode` | `"list" \| "one" \| "random"` | `"list"` | 播放模式：`list` 列表循环，`one` 单曲循环，`random` 随机播放 |
 | `showLyrics` | `boolean` | `true` | 是否启用歌词显示 |
 
@@ -27,7 +27,7 @@
 ```ts
 export const musicPlayerConfig: MusicPlayerConfig = {
   showInNavbar: true,
-  mode: "meting",
+  mode: "local",
   volume: 0.7,
   playMode: "list",
   showLyrics: true,
@@ -41,10 +41,10 @@ export const musicPlayerConfig: MusicPlayerConfig = {
 
 | 配置项 | 类型 | 默认值 | 说明 |
 |--------|------|--------|------|
-| `meting.api` | `string` | `"https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&r=:r"` | Meting API 地址，支持自定义 API |
+| `meting.api` | `string` | `"https://mu.tsh520.cn/api?server=:server&type=:type&id=:id"` | Meting API 地址，支持自定义 API |
 | `meting.server` | `"netease" \| "tencent" \| "kugou" \| "xiami" \| "baidu"` | `"netease"` | 音乐平台 |
-| `meting.type` | `"song" \| "playlist" \| "album" \| "search" \| "artist"` | `"playlist"` | 类型：单曲、歌单、专辑、搜索、艺术家 |
-| `meting.id` | `string` | `"17955431099"` | 歌单/专辑/单曲 ID 或搜索关键词 |
+| `meting.type` | `"song" \| "playlist" \| "album" \| "search" \| "artist"` | `"song"` | 类型：单曲、歌单、专辑、搜索、艺术家 |
+| `meting.id` | `string` | `"30254265974"` | 歌单/专辑/单曲 ID 或搜索关键词 |
 | `meting.auth` | `string` | `""` | 认证 token（可选） |
 | `meting.fallbackApis` | `string[]` | 见源文件 | 备用 API 地址数组，主 API 失败时依次尝试 |
 
@@ -70,12 +70,11 @@ export const musicPlayerConfig: MusicPlayerConfig = {
 
 ### 备用 API
 
-默认配置了两个备用 API：
+默认配置了一个备用 API：
 
 ```ts
 fallbackApis: [
-  "https://api.injahow.cn/meting/?server=:server&type=:type&id=:id",
-  "https://api.moeyao.cn/meting/?server=:server&type=:type&id=:id",
+  "https://mu.tsh520.cn/api?server=:server&type=:type&id=:id",
 ],
 ```
 
@@ -119,9 +118,13 @@ meting: {
 
 使用本地音乐模式时（`mode: "local"`），通过 `local.playlist` 数组配置本地音乐列表。
 
+::: tip
+音乐数据也可以从 `bangumi` 内容集合中加载（当 `category: "music"` 时），此时 `local.playlist` 可以留空。
+:::
+
 | 配置项 | 类型 | 默认值 | 说明 |
 |--------|------|--------|------|
-| `local.playlist` | `Array` | 见源文件 | 本地音乐列表数组 |
+| `local.playlist` | `Array` | `[]` | 本地音乐列表数组 |
 
 每首歌曲支持以下属性：
 
@@ -151,15 +154,7 @@ lrc: "[00:00.00]歌词第一行\n[00:05.00]歌词第二行",
 
 ```ts
 local: {
-  playlist: [
-    {
-      name: "使一颗心免于哀伤",
-      artist: "知更鸟 / HOYO-MiX / Chevy",
-      url: "/assets/music/使一颗心免于哀伤-哼唱.mp3",
-      cover: "/assets/music/cover/109951169585655912.webp",
-      lrc: "",
-    },
-  ],
+  playlist: [],
 },
 ```
 
@@ -197,6 +192,104 @@ local: {
 ::: warning
 使用本地音乐模式时，音乐文件不会被构建优化，请确保文件体积合适以免影响加载速度。
 :::
+
+## 3D 可视化器配置
+
+音乐播放器内置了一个 3D 音频可视化效果，通过 `visualizer` 对象配置。
+
+### 背景配置
+
+| 配置项 | 类型 | 默认值 | 说明 |
+|--------|------|--------|------|
+| `visualizer.background.dark` | `string` | `"#0a0a15"` | 暗色模式背景色 |
+| `visualizer.background.light` | `string` | `"#2D2D2D"` | 亮色模式背景色 |
+
+### 相机配置
+
+| 配置项 | 类型 | 默认值 | 说明 |
+|--------|------|--------|------|
+| `visualizer.camera.position.x` | `number` | `0` | 相机 X 轴位置 |
+| `visualizer.camera.position.y` | `number` | `32` | 相机 Y 轴位置 |
+| `visualizer.camera.position.z` | `number` | `52` | 相机 Z 轴位置 |
+
+### 自动旋转配置
+
+| 配置项 | 类型 | 默认值 | 说明 |
+|--------|------|--------|------|
+| `visualizer.autoRotate` | `boolean` | `true` | 是否启用自动旋转 |
+| `visualizer.autoRotateSpeed` | `number` | `0.3` | 自动旋转速度 |
+
+### 高度配置
+
+控制不同频段的可视化高度：
+
+| 配置项 | 类型 | 默认值 | 说明 |
+|--------|------|--------|------|
+| `visualizer.height.idle` | `number` | `0.6` | 空闲时高度 |
+| `visualizer.height.subBass` | `number` | `4.0` | 超低音频段高度 |
+| `visualizer.height.bass` | `number` | `3.0` | 低音频段高度 |
+| `visualizer.height.lowMid` | `number` | `2.0` | 中低频段高度 |
+| `visualizer.height.mid` | `number` | `2.5` | 中频高度 |
+| `visualizer.height.highMid` | `number` | `2.0` | 中高频段高度 |
+| `visualizer.height.energy` | `number` | `4.0` | 能量柱高度 |
+| `visualizer.height.ripple` | `number` | `3.0` | 波纹高度 |
+| `visualizer.height.rippleAccent` | `number` | `1.0` | 波纹强调高度 |
+
+### 主题配置
+
+| 配置项 | 类型 | 默认值 | 说明 |
+|--------|------|--------|------|
+| `visualizer.theme.base1` | `string` | `"#050810"` | 基础色 1 |
+| `visualizer.theme.base2` | `string` | `"#0a0f1a"` | 基础色 2 |
+| `visualizer.theme.coolCore` | `string` | `"#2255ff"` | 冷色核心 |
+| `visualizer.theme.coolEdge` | `string` | `"#8844ff"` | 冷色边缘 |
+| `visualizer.theme.warmCore` | `string` | `"#ff4422"` | 暖色核心 |
+| `visualizer.theme.warmEdge` | `string` | `"#ffaa00"` | 暖色边缘 |
+| `visualizer.theme.rippleColor` | `string` | `"#44ddff"` | 波纹颜色 |
+| `visualizer.theme.fogColor` | `string` | `"#050810"` | 雾效颜色 |
+| `visualizer.theme.glowIntensity` | `number` | `1.2` | 发光强度 |
+
+### 可视化器示例
+
+```ts
+visualizer: {
+  background: {
+    dark: "#0a0a15",
+    light: "#2D2D2D",
+  },
+  camera: {
+    position: {
+      x: 0,
+      y: 32,
+      z: 52,
+    },
+  },
+  autoRotate: true,
+  autoRotateSpeed: 0.3,
+  height: {
+    idle: 0.6,
+    subBass: 4.0,
+    bass: 3.0,
+    lowMid: 2.0,
+    mid: 2.5,
+    highMid: 2.0,
+    energy: 4.0,
+    ripple: 3.0,
+    rippleAccent: 1.0,
+  },
+  theme: {
+    base1: "#050810",
+    base2: "#0a0f1a",
+    coolCore: "#2255ff",
+    coolEdge: "#8844ff",
+    warmCore: "#ff4422",
+    warmEdge: "#ffaa00",
+    rippleColor: "#44ddff",
+    fogColor: "#050810",
+    glowIntensity: 1.2,
+  },
+},
+```
 
 ## 播放模式说明
 

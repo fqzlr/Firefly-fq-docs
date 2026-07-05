@@ -1,6 +1,6 @@
-﻿# 快速开始
+# 快速开始
 
-Firefly 是一款基于 **Astro 框架** 开发的清新美观且现代化个人博客主题，专为技术爱好者和内容创作者设计。该主题融合了现代 Web 技术栈，提供了丰富的功能模块和高度可定制的界面，让您能够轻松打造出专业且美观的个人博客网站。
+Fqzlr 的博客是一款基于 **Astro 框架** 开发的现代化个人博客主题，基于 Firefly 主题二次开发。专为技术爱好者和内容创作者设计，提供了丰富的功能模块和高度可定制的界面。
 
 ---
 
@@ -23,8 +23,8 @@ Firefly 是一款基于 **Astro 框架** 开发的清新美观且现代化个人
 ### 1. 克隆仓库
 
 ```bash
-git clone https://github.com/fqzlr/my-blog.git
-cd my-blog
+git clone https://github.com/fqzlr/fqzlr-bk.git
+cd dumplingandcakeblog
 ```
 
 ### 2. 安装依赖
@@ -60,54 +60,62 @@ pnpm preview
 ## 项目结构
 
 ```
-my-blog/
-├── docs/                    # VitePress 文档目录（本教程所在位置）
-│   ├── .vitepress/         # VitePress 配置
-│   └── zh/                 # 中文文档
-│       ├── guide/          # 指南文档
-│       ├── config/         # 配置文档
-│       └── components/     # 组件文档
-├── public/                 # 静态资源目录
-│   ├── assets/            # 静态资源（CSS、图片、JS、音乐文件等）
-│   ├── favicon/           # 网站图标
-│   ├── fonts/             # 字体文件
-│   ├── models/            # 3D模型文件
-│   └── pio/               # Live2D/Spine 模型资源
+dumplingandcakeblog/
+├── _backup/                  # 备份文件（旧内容、原始文档、临时文件等）
+├── api/                      # 服务端 API 脚本
+├── public/                   # 静态资源目录（不经过构建优化）
+│   ├── assets/              # 静态资源（图片、JS 等）
+│   ├── favicon/             # 网站图标
+│   ├── gallery/             # 相册图片
+│   └── pio/                 # Live2D/Spine 模型资源
+├── scripts/                  # 工具脚本
+│   ├── fetch-media/         # 媒体资源抓取脚本
+│   ├── fetch-music/         # 音乐下载脚本
+│   ├── generate-icons/      # 图标生成脚本
+│   ├── new-post/            # 新建文章脚本
+│   └── sync/                # 笔记同步脚本
 ├── src/
-│   ├── assets/            # 资源文件（图片等）
-│   ├── components/        # 组件目录
-│   │   ├── about/         # 关于页面组件
-│   │   ├── analytics/     # 统计分析组件
-│   │   ├── comment/       # 评论系统组件
-│   │   ├── common/        # 通用组件
-│   │   ├── controls/      # 控制组件（搜索、主题切换等）
-│   │   ├── features/      # 功能组件（音乐播放器、看板娘等）
-│   │   ├── layout/        # 布局组件
-│   │   ├── misc/          # 杂项组件
-│   │   ├── moments/       # 动态组件
-│   │   ├── pages/         # 页面特定组件
-│   │   └── widget/        # 侧边栏小部件
-│   ├── config/            # ⭐ 配置文件目录（所有可配置项都在这里）
-│   ├── constants/         # 常量定义
-│   ├── content/           # 内容目录（文章、页面、数据）
-│   │   ├── posts/         # 博客文章
-│   │   ├── bangumi/       # 追番/影视/书籍/音乐
-│   │   ├── life/          # 生活记录（日记、笔记等）
-│   │   ├── moments/       # 动态
-│   │   ├── changelog/     # 更新日志
-│   │   └── spec/          # 特殊页面
-│   ├── i18n/              # 国际化配置
-│   ├── layouts/           # 布局模板
-│   ├── pages/             # ⭐ 页面路由目录
-│   ├── plugins/           # 插件配置（Markdown 扩展等）
-│   ├── styles/            # 样式文件
-│   ├── types/             # TypeScript 类型定义
-│   ├── utils/             # 工具函数
-│   └── workers/           # Web Workers
-├── scripts/               # 构建脚本
-├── astro.config.mjs       # Astro 配置文件
-├── package.json           # 项目依赖配置
-└── tsconfig.json          # TypeScript 配置
+│   ├── assets/              # 资源文件（会被构建优化）
+│   │   └── images/          # 图片资源
+│   ├── components/          # 组件目录
+│   │   ├── comment/         # 评论系统组件
+│   │   ├── common/          # 通用组件
+│   │   ├── controls/        # 控制组件（搜索、返回顶部等）
+│   │   ├── edit/            # 在线编辑组件
+│   │   ├── features/        # 功能组件（音乐播放器、看板娘等）
+│   │   ├── guestbook/       # 留言板组件
+│   │   ├── layout/          # 布局组件
+│   │   ├── life/            # 生活相关组件
+│   │   ├── moments/         # 动态组件
+│   │   ├── pages/           # 页面特定组件
+│   │   └── widget/          # 侧边栏小部件
+│   ├── config/              # ⭐ 配置文件目录（所有可配置项都在这里）
+│   ├── constants/           # 常量定义
+│   ├── content/             # 内容目录（文章、页面、数据）
+│   │   ├── posts/           # 博客文章
+│   │   ├── album/           # 相册
+│   │   ├── bangumi/         # 追番/影视/书籍/音乐
+│   │   ├── life/            # 生活记录
+│   │   │   ├── notebooks/   # 笔记本
+│   │   │   ├── places/      # 足迹
+│   │   │   └── routines/    # 日常规划
+│   │   ├── moments/         # 说说动态
+│   │   ├── changelog/       # 更新日志
+│   │   ├── friends/         # 友情链接
+│   │   ├── daohang/         # 网址导航
+│   │   ├── spec/            # 特殊页面
+│   │   ├── ziyuan/          # 资源（公告、名言等）
+│   │   └── danmu/           # 弹幕
+│   ├── content.config.ts    # 内容集合配置
+│   ├── i18n/                # 国际化配置
+│   ├── layouts/             # 布局模板
+│   ├── pages/               # ⭐ 页面路由目录
+│   ├── styles/              # 样式文件
+│   ├── types/               # TypeScript 类型定义
+│   └── utils/               # 工具函数
+├── astro.config.mjs         # Astro 配置文件
+├── package.json             # 项目依赖配置
+└── README.md                # 项目说明
 ```
 
 ---
@@ -124,19 +132,31 @@ my-blog/
 export const siteConfig: SiteConfig = {
   title: "你的博客标题",
   subtitle: "你的博客副标题",
+  site_url: "https://example.com/",
   description: "博客描述",
-  author: "你的名字",
   // ... 更多配置
 }
 ```
 
-### 2. 导航栏配置
+### 2. 个人资料配置
+
+编辑 `src/config/profileConfig.ts` 来设置头像、个人简介、社交链接等：
+
+```typescript
+export const profileConfig: ProfileConfig = {
+  name: "你的名字",
+  avatar: "assets/images/avatar.webp",
+  bio: ["你的个人签名"],
+  links: [
+    { name: "GitHub", icon: "simple-icons:github", url: "https://github.com/yourname" },
+    // ... 更多社交链接
+  ],
+}
+```
+
+### 3. 导航栏配置
 
 编辑 `src/config/navBarConfig.ts` 来定制导航链接。
-
-### 3. 个人资料配置
-
-编辑 `src/config/profileConfig.ts` 来设置头像、个人简介、社交链接等。
 
 ::: tip 提示
 所有配置文件都有详细的注释说明，你可以直接参考注释进行配置。更多配置选项请查看 [配置指南](/zh/config/site-config) 章节。
@@ -165,19 +185,54 @@ category: 随笔
 
 文章的 Frontmatter 支持以下字段：
 
-| 字段 | 说明 | 类型 |
-|------|------|------|
-| `title` | 文章标题 | `string` |
-| `published` | 发布日期 | `Date` |
-| `description` | 文章描述 | `string` |
-| `tags` | 标签列表 | `string[]` |
-| `category` | 文章分类 | `string` |
-| `image` | 封面图片 | `string` |
-| `draft` | 是否为草稿 | `boolean` |
+| 字段 | 说明 | 类型 | 默认值 |
+|------|------|------|--------|
+| `title` | 文章标题 | `string` | - |
+| `published` | 发布日期 | `Date` | - |
+| `updated` | 更新日期 | `Date` | 可选 |
+| `description` | 文章描述 | `string` | `""` |
+| `tags` | 标签列表 | `string[]` | `[]` |
+| `category` | 文章分类 | `string` | `""` |
+| `image` | 封面图片 | `string` | `""` |
+| `draft` | 是否为草稿 | `boolean` | `false` |
+| `pinned` | 是否置顶 | `boolean` | `false` |
+| `comment` | 是否允许评论 | `boolean` | `true` |
+| `lang` | 文章语言 | `string` | `""` |
+| `author` | 作者 | `string` | `""` |
 
 ::: warning 注意
-文章文件名不要包含中文和特殊字符，建议使用英文和数字。
+文章文件名建议使用英文和数字，避免特殊字符。
 :::
+
+---
+
+## 内容编辑方式
+
+### 方式一：直接编辑文件（推荐）
+
+直接在 `src/content/` 对应目录下创建/编辑 Markdown 文件。
+
+### 方式二：在线编辑
+
+网站内置了在线编辑功能，访问 `/admin.html`（需先在 `editConfig.ts` 中配置密码）。
+
+支持在线编辑的内容：
+- 博客文章
+- 说说动态
+- 友情链接
+- 相册
+- 笔记本
+- 日常规划
+- 足迹
+- 赞助
+- 网址导航
+- 番组计划
+
+### 方式三：命令行创建
+
+```bash
+pnpm new-post 文章标题
+```
 
 ---
 
@@ -186,6 +241,6 @@ category: 随笔
 - 📖 了解完整的 [项目结构](/zh/guide/project-structure)
 - ⚙️ 查看所有 [配置选项](/zh/config/site-config)
 - 🎵 配置 [音乐播放器](/zh/guide/music-player)
-- 🎮 体验 [3D音乐可视化](/zh/guide/music-visualizer)
+- 💬 配置 [评论系统](/zh/guide/comments)
+- ✍️ 使用 [CMS后台管理](/zh/guide/admin-panel)
 - 🚀 学习如何 [部署](/zh/guide/deployment) 你的博客
-

@@ -1,25 +1,39 @@
-﻿# 友链配置详解
+# 友链配置详解
 
-友链配置文件用于管理友链页面的显示设置和友链列表，同时支持通过 GitHub Gist 管理外部友链数据源。
+友链配置文件用于管理友链页面的显示设置、申请方式和本站信息。友链数据存放在 `src/content/friends/` 目录下，每个 `.md` 文件代表一个友链。
 
-配置文件路径：
-- `friendsConfig.ts` - 本地友链配置
-- `externalFriendsConfig.ts` - 外部友链数据源配置
+配置文件路径：`src/config/friendsConfig.ts`
+
+友链数据目录：`src/content/friends/`
 
 ## 友链页面配置
 
 | 配置项 | 类型 | 默认值 | 说明 |
 |--------|------|--------|------|
-| `title` | `string` | `""` | 页面标题，留空使用 i18n 翻译 |
-| `description` | `string` | `""` | 页面描述文本，留空使用 i18n 翻译 |
-| `showCustomContent` | `boolean` | `true` | 是否显示底部自定义内容（friends.mdx） |
-| `showComment` | `boolean` | `true` | 是否显示评论区（需先启用评论系统） |
-| `randomizeSort` | `boolean` | `false` | 是否随机排序友链，开启后忽略权重 |
-| `applyLink` | `string` | 见源文件 | 友链申请链接，显示申请按钮 |
+| `columns` | `number` | `2` | 显示列数：2 列或 3 列 |
+| `applyLink` | `boolean` | `true` | 是否开启友链申请功能 |
 
-### 站点信息配置
+## GitHub Issue 申请配置
 
-用于友链申请指南弹窗中展示本站信息：
+支持通过 GitHub Issue 自动申请友链，审核通过后自动添加：
+
+| 配置项 | 类型 | 说明 |
+|--------|------|------|
+| `githubIssue.repo` | `string` | GitHub 仓库地址（格式：`owner/repo`） |
+| `githubIssue.labels` | `string[]` | Issue 标签数组，用于筛选友链申请 |
+
+### 示例
+
+```ts
+githubIssue: {
+  repo: "fqzlr/my-blog",
+  labels: ["friend-link"],
+},
+```
+
+## 本站信息配置
+
+用于在友链申请指南中展示本站信息：
 
 | 配置项 | 类型 | 说明 |
 |--------|------|------|
@@ -27,15 +41,40 @@
 | `siteInfo.desc` | `string` | 站点描述 |
 | `siteInfo.url` | `string` | 站点 URL |
 | `siteInfo.avatar` | `string` | 站点头像 URL |
-| `siteInfo.email` | `string` | 联系邮箱 |
 
-### 注意事项配置
+### 示例
 
-友链申请指南弹窗中的注意事项列表，每项包含 `title` 和 `content`。
+```ts
+siteInfo: {
+  name: "Fqzlr的博客",
+  desc: "躬身入局，心为主理，行有尺度，自持本心",
+  url: "https://fqzlr.com",
+  avatar: "https://q1.qlogo.cn/g?b=qq&nk=20447289&s=640",
+},
+```
 
-## 友链项配置
+## 注意事项配置
 
-每个友链对象包含以下字段：
+友链申请页面中的注意事项列表，每项包含 `title` 和 `content`：
+
+### 示例
+
+```ts
+notes: [
+  {
+    title: "互换原则",
+    content: "请先将本站添加到您的友链页面，确认后会添加您的友链",
+  },
+  {
+    title: "链接维护",
+    content: "友链网站长期无法访问或内容违规，将会被移除",
+  },
+],
+```
+
+## 友链数据格式
+
+友链数据存放在 `src/content/friends/` 目录下，每个 `.md` 文件代表一个友链，通过 frontmatter 配置：
 
 | 字段 | 类型 | 必填 | 说明 |
 |------|------|------|------|
@@ -43,61 +82,38 @@
 | `imgurl` | `string` | 是 | 站点头像 URL |
 | `desc` | `string` | 是 | 站点描述 |
 | `siteurl` | `string` | 是 | 站点链接 |
-| `tags` | `string[]` | 否 | 标签数组，如 `["Blog"]`、`["Docs"]` |
-| `weight` | `number` | 否 | 排序权重，数值越大越靠前，默认 10 |
-| `enabled` | `boolean` | 是 | 是否启用该友链 |
+| `tags` | `string[]` | 否 | 标签数组，如 `["Blog", "技术"]` |
+| `weight` | `number` | 否 | 排序权重，数值越大越靠前，默认 0 |
+| `enabled` | `boolean` | 否 | 是否启用，默认 true |
 
 ### 示例：添加友链
 
-```ts
-{
-  title: "示例博客",
-  imgurl: "https://example.com/avatar.png",
-  desc: "这是一个示例博客",
-  siteurl: "https://example.com/",
-  tags: ["Blog"],
-  weight: 50,
-  enabled: true,
-},
+在 `src/content/friends/` 目录下创建 `example.md`：
+
+```markdown
+---
+title: 示例博客
+imgurl: https://example.com/avatar.png
+desc: 这是一个示例博客
+siteurl: https://example.com/
+tags: ["Blog", "技术"]
+weight: 50
+enabled: true
+---
 ```
 
-## 外部友链数据源配置
+## 在线编辑友链
 
-基于 GitHub Gist 的外部友链数据源，可在不修改代码的情况下更新友链，支持通过后台管理面板在线添加、编辑、删除友链。
+网站内置了在线编辑功能，支持在后台管理友链：
 
-| 配置项 | 类型 | 默认值 | 说明 |
-|--------|------|--------|------|
-| `enable` | `boolean` | `true` | 是否启用外部友链数据源 |
-| `gistId` | `string` | 见源文件 | GitHub Gist ID |
-| `fileName` | `string` | `"friends.json"` | Gist 中的文件名 |
-
-### 使用方法
-
-1. 在 [GitHub Gist](https://gist.github.com/) 创建一个名为 `friends.json` 的 **Secret Gist**，初始内容 `[]`
-2. 从 Gist URL 中获取 Gist ID（如 `https://gist.github.com/user/abc123` 中的 `abc123`）
-3. 将 Gist ID 填入 `gistId` 字段
-4. 登录后台 `/admin/` →「🔧 接口配置」保存 GitHub Token（与说说、笔记等共用）
-5. 进入「友情链接」页面即可在线管理友链
-
-### friends.json 格式示例
-
-```json
-[
-  {
-    "title": "外部友链示例",
-    "imgurl": "https://example.com/avatar.png",
-    "desc": "通过 Gist 管理的友链",
-    "siteurl": "https://example.com/",
-    "tags": ["Blog"],
-    "weight": 10,
-    "enabled": true
-  }
-]
-```
+1. 访问 `/admin.html` 进入后台管理
+2. 进入「友情链接」管理页面
+3. 可以添加、编辑、删除友链
+4. 修改后保存到本地，需要重新构建部署
 
 ::: tip
-- 友链按 `weight` 降序排列，权重相同则按添加顺序排列
+- 友链按 `weight` 降序排列，权重相同则按文件名字母顺序排列
 - 设置 `enabled: false` 可以暂时隐藏友链而不删除
-- 外部友链和本地友链会合并显示
 - 自定义底部内容可在 `src/content/spec/friends.md` 中编写
+- 友链申请的 Issue 模板需要在 GitHub 仓库的 `.github/ISSUE_TEMPLATE/` 中配置
 :::

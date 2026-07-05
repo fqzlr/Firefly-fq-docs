@@ -1,8 +1,8 @@
-﻿# 侧边栏配置
+# 侧边栏配置
 
 侧边栏配置文件用于设置博客侧边栏的布局、位置和组件显示。
 
-配置文件路径：`sidebarConfig.ts`
+配置文件路径：`src/config/sidebarConfig.ts`
 
 ## 侧边栏布局配置
 
@@ -64,9 +64,15 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 | `"profile"` | 用户资料组件 |
 | `"announcement"` | 公告组件 |
 | `"music"` | 音乐播放器组件 |
+| `"postDirectory"` | 全站文章目录（只在文章详情页显示） |
+| `"editPostButton"` | 编辑按钮组件 |
+| `"sidebarToc"` | 文章目录组件（已移至右侧边栏） |
 | `"categories"` | 分类组件 |
-| `"tags"` | 标签组件（已移至浮动坞弹窗） |
+| `"tags"` | 标签组件 |
 | `"advertisement"` | 广告栏组件 |
+| `"lifeStats"` | 生活统计小组件 |
+| `"calendar"` | 日历组件 |
+| `"stats"` | 站点统计组件 |
 
 ### 默认配置
 
@@ -76,25 +82,46 @@ leftComponents: [
     type: "profile",
     enable: true,
     position: "top",
-    showOnPostPage: true,
+    showOnPostPage: false,
   },
   {
     type: "announcement",
-    enable: true,
+    enable: false,
     position: "top",
-    showOnPostPage: true,
+    showOnPostPage: false,
   },
   {
     type: "music",
+    enable: false,
+    position: "sticky",
+    showOnPostPage: false,
+  },
+  {
+    type: "postDirectory",
     enable: true,
     position: "sticky",
     showOnPostPage: true,
+    showOnNonPostPage: false,
+  },
+  {
+    type: "editPostButton",
+    enable: true,
+    position: "sticky",
+    showOnPostPage: true,
+    showOnNonPostPage: true,
+  },
+  {
+    type: "sidebarToc",
+    enable: false,
+    position: "sticky",
+    showOnPostPage: true,
+    showOnNonPostPage: false,
   },
   {
     type: "categories",
-    enable: true,
+    enable: false,
     position: "sticky",
-    showOnPostPage: true,
+    showOnPostPage: false,
     responsive: {
       collapseThreshold: 5,
     },
@@ -103,9 +130,9 @@ leftComponents: [
     type: "tags",
     enable: false,
     position: "sticky",
-    showOnPostPage: true,
+    showOnPostPage: false,
     responsive: {
-      collapseThreshold: 10,
+      collapseThreshold: 20,
     },
   },
   {
@@ -115,6 +142,24 @@ leftComponents: [
     showOnPostPage: true,
     configId: "ad1",
   },
+  {
+    type: "lifeStats",
+    enable: false,
+    position: "sticky",
+    showOnPostPage: false,
+  },
+  {
+    type: "calendar",
+    enable: true,
+    position: "sticky",
+    showOnPostPage: false,
+  },
+  {
+    type: "stats",
+    enable: true,
+    position: "sticky",
+    showOnPostPage: false,
+  },
 ],
 ```
 
@@ -122,7 +167,7 @@ leftComponents: [
 
 | 属性 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
-| `responsive.collapseThreshold` | `number` | `5`（分类）/ `10`（标签） | 折叠阈值：当数量超过此值时自动折叠 |
+| `responsive.collapseThreshold` | `number` | `5`（分类）/ `20`（标签） | 折叠阈值：当数量超过此值时自动折叠 |
 
 ## 右侧边栏组件
 
@@ -132,9 +177,12 @@ leftComponents: [
 
 | 类型 | 说明 |
 |------|------|
-| `"stats"` | 站点统计组件 |
-| `"calendar"` | 日历组件 |
-| `"sidebarToc"` | 侧边栏目录组件（只在文章详情页显示） |
+| `"relationship"` | 恋爱计时小组件 |
+| `"siteVisitCounter"` | 站点访问量组件 |
+| `"siteHeatmap"` | 网站更新热力图组件 |
+| `"quoteOfTheDay"` | 今日一言组件 |
+| `"recentItems"` | 最近更新组件 |
+| `"sidebarToc"` | 文章目录组件（仅在文章详情页显示） |
 | `"advertisement"` | 广告栏组件 |
 
 ### 默认配置
@@ -142,15 +190,33 @@ leftComponents: [
 ```ts
 rightComponents: [
   {
-    type: "stats",
+    type: "relationship",
     enable: true,
+    position: "top",
+    showOnPostPage: false,
+  },
+  {
+    type: "siteVisitCounter",
+    enable: true,
+    position: "top",
+    showOnPostPage: false,
+  },
+  {
+    type: "siteHeatmap",
+    enable: false,
     position: "top",
     showOnPostPage: true,
   },
   {
-    type: "calendar",
+    type: "quoteOfTheDay",
     enable: true,
-    position: "sticky",
+    position: "top",
+    showOnPostPage: false,
+  },
+  {
+    type: "recentItems",
+    enable: true,
+    position: "top",
     showOnPostPage: false,
   },
   {
@@ -174,44 +240,49 @@ rightComponents: [
 
 移动端（<768px）底部组件通过 `mobileBottomComponents` 数组配置，这些组件独立于左右侧边栏配置。
 
+### 可用组件类型
+
+| 类型 | 说明 |
+|------|------|
+| `"profile"` | 用户资料组件 |
+| `"relationship"` | 恋爱计时小组件 |
+| `"recentItems"` | 最近更新组件 |
+| `"announcement"` | 公告组件 |
+| `"music"` | 音乐播放器组件 |
+| `"stats"` | 站点统计组件 |
+
 ### 默认配置
 
 ```ts
 mobileBottomComponents: [
   {
     type: "profile",
+    enable: false,
+    showOnPostPage: true,
+  },
+  {
+    type: "relationship",
+    enable: true,
+    showOnPostPage: true,
+  },
+  {
+    type: "recentItems",
     enable: true,
     showOnPostPage: true,
   },
   {
     type: "announcement",
-    enable: true,
+    enable: false,
     showOnPostPage: true,
   },
   {
     type: "music",
-    enable: true,
-    showOnPostPage: true,
-  },
-  {
-    type: "categories",
-    enable: true,
-    showOnPostPage: true,
-    responsive: {
-      collapseThreshold: 5,
-    },
-  },
-  {
-    type: "tags",
     enable: false,
     showOnPostPage: true,
-    responsive: {
-      collapseThreshold: 20,
-    },
   },
   {
     type: "stats",
-    enable: false,
+    enable: true,
     showOnPostPage: true,
   },
 ],

@@ -1,114 +1,141 @@
-﻿# 说说动态配置详解
+# 说说动态配置详解
 
-说说动态配置文件用于配置基于 GitHub Gist 的外部说说数据源，支持通过后台管理面板在线发布、编辑、删除说说，无需修改代码或重新构建。
+说说动态是类似朋友圈的短内容发布功能，支持图片、标签、定位、设备信息等。
 
-配置文件路径：`externalMomentsConfig.ts`
+数据目录：`src/content/moments/`
 
-::: tip
-说说功能配合 CMS 后台管理面板使用，可以在线发布动态，无需每次都修改代码重新部署。
-:::
-
-## 基本配置
-
-| 配置项 | 类型 | 默认值 | 说明 |
-|--------|------|--------|------|
-| `enable` | `boolean` | `true` | 是否启用外部说说数据源 |
-| `gistId` | `string` | 见源文件 | GitHub Gist ID |
-| `fileName` | `string` | `"moments.json"` | Gist 中的文件名 |
-| `defaultAuthor` | `string` | 见源文件 | 默认作者名称 |
-| `defaultAvatar` | `string` | 见源文件 | 默认作者头像 |
-| `adminPasswordHash` | `string` | 见源文件 | 后台管理密码的 SHA-256 哈希 |
-| `githubToken` | `string` | 环境变量 | GitHub Personal Access Token，优先从 `GITHUB_TOKEN` 环境变量读取 |
-
-## 配置步骤
-
-### 1. 创建 GitHub Gist
-
-1. 访问 [GitHub Gist](https://gist.github.com/)
-2. 创建一个 **Secret Gist**（重要！不要创建公开 Gist）
-3. 文件名填写 `moments.json`
-4. 初始内容填写 `[]`（空数组）
-5. 创建后从 URL 中获取 Gist ID
-
-### 2. 创建 GitHub Token
-
-需要一个具有 Gist 编辑权限的 Token：
-
-1. 前往 GitHub [Settings → Developer settings → Personal access tokens](https://github.com/settings/tokens)
-2. 生成一个新的 Token（经典 Token 即可）
-3. 勾选 `gist` 权限
-4. 生成后复制保存 Token（只显示一次）
-
-### 3. 配置 Token
-
-**方式一：后台统一配置（推荐）**
-
-登录后台 `/admin/`，进入「🔧 接口配置」页面，在「🔑 GitHub Token」输入框中粘贴 Token 并保存。一处配置，说说、笔记、友情链接、影视追番等所有模块共用。
-
-**方式二：环境变量配置**
-
-在部署平台（如 EdgeOne Pages、Vercel）的环境变量中添加：
-```
-GITHUB_TOKEN=你的GitHubToken
-```
-
-本地开发时可以在 `.env` 文件中添加。配置环境变量后后台会自动读取，无需手动输入。
-
-### 4. 修改后台密码
-
-默认密码是 `admin123`，**强烈建议修改为自己的密码**。
-
-**在线修改（推荐）：** 登录后台后进入「🔧 接口配置 → 🔐 管理密码修改」，输入新密码即可在线修改，系统自动计算 SHA-256 哈希并提交到 GitHub。
-
-**手动修改：** 生成密码哈希后替换 `adminPasswordHash` 的值。哈希生成方法：
-
-- PowerShell：`[BitConverter]::ToString([System.Security.Cryptography.SHA256]::Create().ComputeHash([System.Text.Encoding]::UTF8.GetBytes("你的新密码"))).Replace("-", "").ToLower()`
-- 浏览器控制台：`await crypto.subtle.digest('SHA-256', new TextEncoder().encode('你的新密码')).then(b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join(''))`
+Schema 定义：`src/content.config.ts` 中的 `momentsCollection`
 
 ## 数据格式
 
-`moments.json` 是一个数组，每个说说包含：
+每个说说为一个独立的 `.md` 文件，通过 frontmatter 配置元数据，正文为说说内容（支持 Markdown）。
 
-| 字段 | 类型 | 说明 |
-|------|------|------|
-| `id` | `string` | 唯一ID，自动生成 |
-| `content` | `string` | 说说内容（支持 Markdown） |
-| `date` | `string` | 发布时间 ISO 格式 |
-| `author` | `string` | 作者名称 |
-| `avatar` | `string` | 作者头像 |
-| `images` | `string[]` | 图片 URL 数组（可选） |
-| `tags` | `string[]` | 标签数组（可选） |
+## Frontmatter 字段
 
-### 示例：moments.json
+| 字段 | 类型 | 必填 | 默认值 | 说明 |
+|------|------|------|--------|------|
+| `published` | `date` | 是 | - | 发布时间 |
+| `author` | `string` | 否 | `""` | 作者名称 |
+| `avatar` | `string` | 否 | `""` | 作者头像 URL |
+| `pinned` | `boolean` | 否 | `false` | 是否置顶 |
+| `images` | `string[]` | 否 | `[]` | 图片 URL 数组 |
+| `tags` | `string[]` | 否 | `[]` | 标签数组 |
+| `location` | `string` | 否 | `""` | 定位/地点信息 |
+| `device` | `string` | 否 | `""` | 发布设备信息 |
 
-```json
-[
-  {
-    "id": "1718888888888",
-    "content": "今天天气真好！☀️\n\n出去走走看看~",
-    "date": "2024-06-20T10:30:00.000Z",
-    "author": "博主",
-    "avatar": "https://example.com/avatar.png",
-    "images": [
-      "https://example.com/photo1.jpg",
-      "https://example.com/photo2.jpg"
-    ],
-    "tags": ["日常", "心情"]
-  }
-]
+## 图片字段说明
+
+`images` 字段支持以下格式：
+
+1. **字符串数组**（推荐）：
+```yaml
+images:
+  - https://example.com/photo1.jpg
+  - https://example.com/photo2.jpg
 ```
 
-## 使用后台管理
+2. **单张图片**（字符串形式）：
+```yaml
+images: https://example.com/photo.jpg
+```
 
-1. 访问 `/admin/` 页面进入后台管理
-2. 输入密码登录
-3. 可以在线发布、编辑、删除说说
-4. 支持添加图片、标签
-5. 修改会实时保存到 Gist，无需重新构建
+::: tip
+图片支持远程 URL 和本地路径。本地路径以 `/` 开头表示 `public` 目录。
+:::
 
-::: warning
-- **务必使用 Secret Gist**，否则你的说说数据和 Token 可能泄露
-- 请妥善保管 GitHub Token，不要提交到代码仓库
-- 后台密码仅存储为 SHA-256 哈希，无法从哈希反推明文
-- 建议定期更换密码和 Token
+## 示例
+
+### 基础说说
+
+```markdown
+---
+published: 2024-06-20 10:30:00
+author: 博主
+avatar: https://example.com/avatar.png
+tags:
+  - 日常
+  - 心情
+---
+
+今天天气真好！☀️
+
+出去走走看看~
+```
+
+### 带图片的说说
+
+```markdown
+---
+published: 2026-06-30 14:11:59
+author: fqzlr
+avatar: https://re.tsh520.cn/zl/tx.webp
+tags:
+  - 日常
+  - 动漫
+location: 郑州市-河南省
+images:
+  - https://ph.0824.uk/file/手机uu/1782828685076_237413170.jpg
+---
+
+大夏境内，神明禁行
+```
+
+### 置顶说说
+
+```markdown
+---
+published: 2024-01-01 00:00:00
+author: 博主
+pinned: true
+tags:
+  - 公告
+---
+
+🎊 博客上线啦！欢迎来访~
+```
+
+### 带设备信息的说说
+
+```markdown
+---
+published: 2024-06-20 18:00:00
+author: 博主
+device: iPhone 15 Pro
+location: 北京市
+tags:
+  - 生活
+---
+
+刚下班，今天的晚霞真美~
+```
+
+## 文件命名规范
+
+建议使用日期作为文件名，方便管理和排序：
+
+```
+src/content/moments/
+├── 2026-06-30.md
+├── 2026-06-29.md
+├── 2026-06-20.md
+└── ...
+```
+
+如果同一天有多条说说，可以在日期后加序号：
+
+```
+2026-06-10.md
+2026-06-10-2.md
+2026-06-10-3.md
+```
+
+## 排序规则
+
+说说按 `published` 字段降序排列，最新发布的显示在最前面。置顶的说说（`pinned: true`）会优先显示。
+
+::: tip
+- 说说内容支持完整的 Markdown 语法
+- 可以在正文中使用表情符号
+- 图片支持点击放大查看
+- 标签可用于分类筛选
 :::
